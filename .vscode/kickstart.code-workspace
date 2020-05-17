@@ -1,8 +1,10 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
-	"settings": {}
+    "folders": [{
+        "path": ".."
+    }],
+    "settings": {
+        "css.validate": false,
+        "scss.validate": false,
+        "stylelint.enable": true,
+    }
 }

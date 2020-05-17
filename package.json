@@ -30,6 +30,8 @@
         "vuex-module-decorators": "^0.17.0"
     },
     "dependencies": {
+        "stylelint-config-recommended": "^3.0.0",
+        "tailwindcss": "^1.4.6",
         "vue-class-component": "^7.2.3",
         "vue-property-decorator": "^8.4.2",
         "vue-router": "^3.1.6",
