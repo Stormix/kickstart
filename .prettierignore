@@ -1,0 +1,5 @@
+package-lock.json
+vendor/
+node_modules/
+public/*
+resources/views/*

@@ -1,0 +1,47 @@
+{
+  "parser": "vue-eslint-parser",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "plugins": ["vue"],
+  "extends": [
+    "plugin:vue/recommended",
+    "eslint:recommended"
+    // "prettier/vue",
+    // "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "allowImportExportEverywhere": true,
+    "modules": true
+  },
+  "rules": {
+    "vue/max-attributes-per-line": [
+      2,
+      {
+        "singleline": 20,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ],
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "always",
+          "normal": "always",
+          "component": "always"
+        },
+        "svg": "always",
+        "math": "always"
+      }
+    ]
+  }
+}
