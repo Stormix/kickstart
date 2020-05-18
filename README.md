@@ -1,3 +1,4 @@
+# WIP - DO NOT CLONE
 # Kickstart - A Laravel Boilerplate for personal/client projects
 
 ## Introduction
