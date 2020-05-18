@@ -20,8 +20,8 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <App />
-    </div>
+<div id="app" class="h-full">
+    <App />
+</div>
 </body>
 </html>

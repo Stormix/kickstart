@@ -10,6 +10,7 @@ import ExampleComponent from '@/components/ExampleComponent.vue'
 import Router from '@/router'
 import Store from '@/store'
 import App from '@/App.vue'
+import VueHead from 'vue-head'
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,6 +24,7 @@ import App from '@/App.vue'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example', ExampleComponent)
+Vue.use(VueHead)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

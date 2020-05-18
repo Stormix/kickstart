@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <div class="h-full dark:bg-black">
-      <router-view />
-    </div>
+  <div class="h-screen">
+    <router-view />
   </div>
 </template>
 

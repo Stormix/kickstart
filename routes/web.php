@@ -20,6 +20,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('email/resend', 'Auth\VerificationController@resend');
 
 Route::get('/{vue_capture}', function () {
     return view('app');
