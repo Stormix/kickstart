@@ -13,15 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth::routes(['verify' => true]);
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::post('register', 'Auth\RegisterController@register');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::post('email/resend', 'Auth\VerificationController@resend');
-
+Auth::routes(['verify' => true]);
 Route::get('/{vue_capture}', function () {
     return view('app');
 })->where('vue_capture', '[\/\w\.-]*');

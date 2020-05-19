@@ -1,3 +1,33 @@
-☐ Auth
-☐ Vue i18n
+☐ Access Control
+  ✔ Register/Login/Logout
+  ☐ 2FA
+  ☐ Password Reset
+  ☐ Third party login (Github/Facebook/Twitter/Google/Linked In/BitBucket)
+  ✔ Account Confirmation By E-mail
+  ☐ Resend Confirmation E-mail
+  ☐ Option for Manual Account Confirmation by Admin
+  ☐ Login Throttling
+  ☐ Enable/Disable Registration
+  ☐ Administrator Management
+    ☐ User Index
+    ☐ Activate/Deactivate Users
+    ☐ Soft & Permanently Delete Users
+    ☐ Resend User Confirmation E-mails
+    ☐ Change Users Password
+    ☐ Create/Manage Roles
+    ☐ Manage Users Roles/Permissions
+    ☐ Impersonate User
+☐ User Dashboard
+☐ Administration Dashboard
+☐ Localization / Vue i18n.
+☐ Gravatar
+☐ Laravel Debugbar
+☐ Laravel Telescope
+☐ Event subscribers
+☐ Google reCaptcha
+☐ Timezone Support
 ☐ Sentry
+☐ Subscriptions & Biling
+☐ Annoucements
+☐ Invoices
+☐ Teams

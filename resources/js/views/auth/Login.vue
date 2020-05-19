@@ -2,6 +2,11 @@
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
       <form @submit.prevent="authenticate">
+        <Alert
+          v-if="verify"
+          type="info"
+          content="Please login to verify your account !"
+        />
         <div>
           <label
             for="email"
@@ -108,14 +113,17 @@
 <script lang="ts">
 import { Component, Vue, Mixins } from 'vue-property-decorator'
 import GlobalHelper from '@/mixins/GlobalHelper'
+import Alert from '@/components/Alert.vue'
 @Component({
-  components: {}
+  components: { Alert }
 })
 export default class Login extends Mixins(GlobalHelper) {
   private email: string = ''
   private password: string = ''
   private remember: boolean = false
   private startValidation: boolean = false
+  private verify: boolean = false
+  private redirectTo: string = '/home' //TODO: make this an env variable
   get validEmail(): boolean {
     // eslint-disable-next-line no-useless-escape
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -130,24 +138,32 @@ export default class Login extends Mixins(GlobalHelper) {
   get isValid(): boolean {
     return this.validEmail && this.validPassword
   }
+  created() {
+    if (
+      'id' in this.$route.query &&
+      'hash' in this.$route.query &&
+      'signature' in this.$route.query &&
+      'expires' in this.$route.query
+    ) {
+      this.verify = true
+      const { id, hash, signature, expires } = this.$route.query
+      this.redirectTo = `/email/verify/${id}/${hash}?expires=${expires}&signature=${signature}`
+    }
+  }
   login(): void {
     this.startValidation = true
     const data = {
       email: this.email,
-      password: this.password
+      password: this.password,
+      remember: this.remember
     }
     this.$store
       .dispatch('user/loginUser', data)
       .then(response => {
-        if (response.status == 201) {
-          // this.$notify({
-          //   type: 'success',
-          //   message:
-          //     'Account created ! Check your email for further instructions.'
-          // })
-          setTimeout(() => {
-            this.$router.push('login')
-          }, 2000)
+        if (this.verify) {
+          window.location.href = this.redirectTo
+        } else {
+          this.$router.replace(this.redirectTo)
         }
       })
       .catch(error => {

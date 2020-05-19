@@ -5,16 +5,16 @@ import { UserModel } from '@/types/store'
 @Module({ namespaced: true })
 class User extends VuexModule {
   public current: any = null
-  // get nameUpperCase() {
-  //   return this.name.toUpperCase()
-  // }
   @Mutation
   public setCurrentUser(user: UserModel): void {
     this.current = user
   }
+  @Mutation
+  public unsetCurrentUser(): void {
+    this.current = null
+  }
   @Action({ rawError: true })
   public registerNewUser(newUser: UserModel): Promise<AxiosResponse> {
-    console.log(newUser)
     const { name, email, password } = newUser
     return axios.post('/register', {
       name,
@@ -23,12 +23,33 @@ class User extends VuexModule {
       password_confirmation: password
     })
   }
-  // this.context.commit('setCurrentUser', newUser)
-  // @Action({ rawError: true })
-  // public loginUser(newUser: User): void {}
-  // @Action({ rawError: true })
-  // public verifyAccount(newUser: User): void {}
-  // @Action({ rawError: true })
-  // public checkResetToken(newUser: User): void {}
+  @Action({ rawError: true })
+  public async loginUser(user: UserModel): Promise<void> {
+    const { remember, email, password } = user
+    await axios.get('/sanctum/csrf-cookie')
+    return axios
+      .post('/login', {
+        email,
+        password,
+        remember // Not used for now
+      })
+      .then(({ status }) => {
+        if (status == 204) {
+          this.context.dispatch('getCurrentUser')
+        }
+      })
+  }
+  @Action({ rawError: true })
+  public async getCurrentUser(): Promise<void> {
+    return axios
+      .get('/api/user')
+      .then(({ data }) => this.context.commit('setCurrentUser', data))
+  }
+  @Action({ rawError: true })
+  logout() {
+    return axios
+      .post('/logout')
+      .then(() => this.context.commit('unsetCurrentUser'))
+  }
 }
 export default User
