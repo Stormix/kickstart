@@ -28,9 +28,8 @@ class GlobalHelper extends Vue {
       console.error('Something went wrong')
       return `Something went wrong`
     }
-    console.error(error)
     if (error && error.response && error.response.status <= 422) {
-      return `${errors[error.response.data.error] || 'Not provided'}`
+      return `${error.response.data.message || 'Not provided'}`
     } else {
       return `Something went wrong. Error: ${error.response?.data.error ||
         'Not provided'}`

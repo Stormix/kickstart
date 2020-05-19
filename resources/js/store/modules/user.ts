@@ -40,10 +40,12 @@ class User extends VuexModule {
       })
   }
   @Action({ rawError: true })
-  public async getCurrentUser(): Promise<void> {
+  public async getCurrentUser(): Promise<boolean> {
     return axios
       .get('/api/user')
       .then(({ data }) => this.context.commit('setCurrentUser', data))
+      .then(() => true)
+      .catch(() => false)
   }
   @Action({ rawError: true })
   logout() {

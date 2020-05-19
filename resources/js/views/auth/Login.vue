@@ -7,6 +7,7 @@
           type="info"
           content="Please login to verify your account !"
         />
+        <Alert v-if="error" type="danger" :content="message" />
         <div>
           <label
             for="email"
@@ -32,6 +33,19 @@
           <p v-if="!validEmail" class="mt-2 text-sm text-red-600">
             The email address is not valid!
           </p>
+          <p
+            v-if="this.errors"
+            class="mt-2 text-sm text-red-600"
+          >
+          <ul>
+            <li 
+            v-for="err in this.errors.email"
+            :key="err"
+            >
+              {{ err }}
+            </li>
+          </ul>
+          </p>
         </div>
 
         <div class="mt-6">
@@ -56,6 +70,20 @@
           </div>
           <p v-if="!validPassword" class="mt-2 text-sm text-red-600">
             The password cannot be empty!
+          </p>
+          
+          <p
+            v-if="this.errors"
+            class="mt-2 text-sm text-red-600"
+          >
+          <ul>
+            <li 
+            v-for="err in this.errors.password"
+            :key="err"
+            >
+              {{ err }}
+            </li>
+          </ul>
           </p>
         </div>
 
@@ -124,6 +152,9 @@ export default class Login extends Mixins(GlobalHelper) {
   private startValidation: boolean = false
   private verify: boolean = false
   private redirectTo: string = '/home' //TODO: make this an env variable
+  private error: boolean = false
+  private errors: Object = {}
+  private message: string | null = null
   get validEmail(): boolean {
     // eslint-disable-next-line no-useless-escape
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -149,8 +180,12 @@ export default class Login extends Mixins(GlobalHelper) {
       const { id, hash, signature, expires } = this.$route.query
       this.redirectTo = `/email/verify/${id}/${hash}?expires=${expires}&signature=${signature}`
     }
+    if ('redirectFrom' in this.$route.query) {
+      this.redirectTo = this.$route.query.redirectFrom.toString() || '/home'
+    }
   }
   login(): void {
+    this.error = false
     this.startValidation = true
     const data = {
       email: this.email,
@@ -167,7 +202,9 @@ export default class Login extends Mixins(GlobalHelper) {
         }
       })
       .catch(error => {
-        this.handleError(error)
+        this.error = true
+        this.message = this.handleError(error)
+        this.errors = error.response?.data.errors
       })
   }
 }

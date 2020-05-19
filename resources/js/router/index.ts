@@ -7,10 +7,11 @@ import Login from '@/views/auth/Login.vue'
 import Register from '@/views/auth/Register.vue'
 import Reset from '@/views/auth/Reset.vue'
 import Verify from '@/views/auth/Verify.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     {
@@ -18,7 +19,9 @@ export default new VueRouter({
       name: 'welcome',
       component: Welcome,
       meta: {
-        title: 'Welcome'
+        title: 'Welcome',
+        requiresAuth: false,
+        redirectsIfAuth: false
       }
     },
     {
@@ -26,17 +29,11 @@ export default new VueRouter({
       name: 'home',
       component: Home,
       meta: {
-        title: 'Home'
+        title: 'Home',
+        requiresAuth: true,
+        redirectsIfAuth: false
       }
     },
-    // {
-    //   path: '/email/verify/:id',
-    //   name: 'verify',
-    //   component: Verify,
-    //   meta: {
-    //     title: 'Email verification'
-    //   }
-    // },
     {
       path: '/auth',
       name: 'auth',
@@ -47,7 +44,9 @@ export default new VueRouter({
           path: 'login',
           component: Login,
           meta: {
-            title: 'Login'
+            title: 'Login',
+            requiresAuth: false,
+            redirectsIfAuth: true
           }
         },
         {
@@ -55,7 +54,9 @@ export default new VueRouter({
           path: 'register',
           component: Register,
           meta: {
-            title: 'Register'
+            title: 'Register',
+            requiresAuth: false,
+            redirectsIfAuth: true
           }
         },
         {
@@ -63,10 +64,40 @@ export default new VueRouter({
           path: 'reset',
           component: Reset,
           meta: {
-            title: 'Reset Password'
+            title: 'Reset Password',
+            requiresAuth: false,
+            redirectsIfAuth: true
           }
         }
       ]
     }
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  // TODO: this probably could be refactored
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const hasPermission = await store.dispatch('user/getCurrentUser')
+    if (hasPermission) {
+      next()
+    } else {
+      next({
+        path: '/auth/login',
+        query: { redirectFrom: to.fullPath }
+      })
+    }
+  } else if (to.matched.some(record => record.meta.redirectsIfAuth)) {
+    const hasPermission = await store.dispatch('user/getCurrentUser')
+    if (hasPermission) {
+      next({
+        path: '/home'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
