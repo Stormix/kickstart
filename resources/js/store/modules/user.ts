@@ -48,6 +48,12 @@ class User extends VuexModule {
       .catch(() => false)
   }
   @Action({ rawError: true })
+  public async forgotPassword(email: string): Promise<void> {
+    return axios.post('/password/email', {
+      email
+    })
+  }
+  @Action({ rawError: true })
   logout() {
     return axios
       .post('/logout')

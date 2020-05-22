@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Home Page</h1>
-    <example />
+    <h1 class="text-4xl">Home Page</h1>
+    <!-- <example /> -->
   </div>
 </template>
 

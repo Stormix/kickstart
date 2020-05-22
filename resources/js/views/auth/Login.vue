@@ -113,7 +113,7 @@
 
             <router-link
               tag="a"
-              to="/auth/reset"
+              to="/auth/forgot"
               class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
             >
               Forgot your password?

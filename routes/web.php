@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
 Route::get('/{vue_capture}', function () {
     return view('app');
 })->where('vue_capture', '[\/\w\.-]*');
+Auth::routes(['verify' => true]);
 
 // Catch All other Routes
 Route::any('{any}', function () {

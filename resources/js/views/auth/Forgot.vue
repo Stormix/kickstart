@@ -43,67 +43,6 @@
           </ul>
           </p>
         </div>
-        <div class="mt-6">
-          <label
-            for="password"
-            class="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Password
-          </label>
-
-          <div class="mt-1 rounded-md shadow-sm">
-            <input
-              v-model="password"
-              id="password"
-              type="password"
-              required
-              class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-              :class="{
-                'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red': !validPassword
-              }"
-            />
-          </div>
-          <p v-if="!validPassword" class="mt-2 text-sm text-red-600">
-            The password cannot be empty!
-          </p>
-          
-          <p
-            v-if="this.errors"
-            class="mt-2 text-sm text-red-600"
-          >
-          <ul>
-            <li 
-            v-for="err in this.errors.password"
-            :key="err"
-            >
-              {{ err }}
-            </li>
-          </ul>
-          </p>
-        </div>
-
-        
-        <div class="mt-6">
-          <label
-            for="password_confirmation"
-            class="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Confirm Password
-          </label>
-
-          <div class="mt-1 rounded-md shadow-sm">
-            <input
-              v-model="password_confirmation"
-              id="password_confirmation"
-              type="password"
-              required
-              class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-              :class="{
-                'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red': !validPassword
-              }"
-            />
-          </div>
-        </div>
 
         <div class="mt-6">
           <span class="block w-full rounded-md shadow-sm">
@@ -131,10 +70,8 @@ import Alert from '@/components/Alert.vue'
     Alert
   }
 })
-export default class Reset extends Mixins(GlobalHelper) {
-  private password: string = ''
+export default class Forgot extends Mixins(GlobalHelper) {
   private email: string = ''
-  private password_confirmation: string = ''
   private startValidation: boolean = false
   private success: boolean = false
   private error: boolean = false
@@ -148,14 +85,8 @@ export default class Reset extends Mixins(GlobalHelper) {
       (this.email.length > 0 && re.test(String(this.email).toLowerCase()))
     )
   }
-  get validPassword(): boolean {
-    return (
-      !this.startValidation ||
-      (this.password.length > 8 && this.password === this.password_confirmation)
-    )
-  }
   get isValid(): boolean {
-    return  this.validEmail && this.validPassword
+    return this.validEmail
   }
   reset(): void {
     this.success = false

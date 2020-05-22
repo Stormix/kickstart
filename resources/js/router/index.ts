@@ -6,7 +6,7 @@ import AuthLayout from '@/layouts/auth.vue'
 import Login from '@/views/auth/Login.vue'
 import Register from '@/views/auth/Register.vue'
 import Reset from '@/views/auth/Reset.vue'
-import Verify from '@/views/auth/Verify.vue'
+import Forgot from '@/views/auth/Forgot.vue'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -35,6 +35,23 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/password/reset/:token',
+      name: 'reset',
+      component: AuthLayout,
+      children: [
+        {
+          name: 'reset',
+          path: '/',
+          component: Reset,
+          meta: {
+            title: 'Reset Password',
+            requiresAuth: false,
+            redirectsIfAuth: true
+          }
+        }
+      ]
+    },
+    {
       path: '/auth',
       name: 'auth',
       component: AuthLayout,
@@ -60,11 +77,11 @@ const router = new VueRouter({
           }
         },
         {
-          name: 'reset',
-          path: 'reset',
-          component: Reset,
+          name: 'forgot',
+          path: 'forgot',
+          component: Forgot,
           meta: {
-            title: 'Reset Password',
+            title: 'Forgot Password',
             requiresAuth: false,
             redirectsIfAuth: true
           }

@@ -1,15 +1,18 @@
 <template>
   <div class="w-full h-full flex-center position-ref">
     <div class="top-right links">
-      <router-link tag="a" to="/home">
-        Home
-      </router-link>
-      <router-link tag="a" to="/auth/login">
+      <router-link v-if="!isLoggedIn" tag="a" to="/auth/login">
         Login
       </router-link>
-      <router-link tag="a" to="/auth/register">
+      <router-link v-if="!isLoggedIn" tag="a" to="/auth/register">
         Register
       </router-link>
+      <router-link v-if="isLoggedIn" tag="a" to="/home">
+        Welcome, {{ current.name }}
+      </router-link>
+      <a v-if="isLoggedIn" href="#" @click.prevent="logout">
+        Logout
+      </a>
     </div>
 
     <div class="content">
@@ -28,10 +31,13 @@
 <script lang="ts">
 import { Component, Vue, Mixins } from 'vue-property-decorator'
 import GlobalHelper from '@/mixins/GlobalHelper'
+import AuthHelper from '@/mixins/AuthHelper'
 
 @Component
-export default class Welcome extends Mixins(GlobalHelper) {
-  //
+export default class Welcome extends Mixins(GlobalHelper, AuthHelper) {
+  mounted(): void {
+    this.getCurrentUser()
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -55,6 +55,8 @@ export default class AuthLayout extends Mixins(GlobalHelper) {
         return 'Sign in to your account'
       case 'register':
         return 'Create a new account'
+      case 'forgot':
+        return 'Forgot password'
       case 'reset':
         return 'Reset password'
       default:
@@ -74,6 +76,8 @@ export default class AuthLayout extends Mixins(GlobalHelper) {
       case 'login':
         return '/auth/register'
       case 'register':
+        return '/auth/login'
+      case 'forgot':
         return '/auth/login'
       case 'reset':
         return '/auth/login'
