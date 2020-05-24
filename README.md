@@ -1,9 +1,26 @@
 # WIP - DO NOT CLONE
+
 # Kickstart - A Laravel Boilerplate for personal/client projects
 
 ## Introduction
 
 A very opinionated Laravel SPA boiletplate using **Laravel 7.x** / **Typescript** / **Vue (VueRouter - Vuex)**
+
+## Installing
+
+## Configuring
+
+## Testing
+
+### Pest
+
+### Cypress
+
+## Docker
+
+## CI / CD
+
+### Github Actions
 
 ## Issues
 

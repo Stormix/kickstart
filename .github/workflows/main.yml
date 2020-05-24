@@ -1,34 +1,55 @@
-name: CD
+name: CI / CD
 
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-  deploy:
+  build-backend:
     runs-on: ubuntu-latest
+    name: Laravel Tests
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
         with:
-          token: ${{ secrets.PUSH_TOKEN }}
-      - name: Set up Node
-        uses: actions/setup-node@v1
+          path: ~/.composer/cache/files
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          node-version: "12.x"
-      - run: yarn
-      - run: yarn production
-      - name: Commit built assets
+          php-version: 7.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-suggest
+
+      - name: Execute backend tests
+        run: ./vendor/bin/pest
+
+      - name: Install NPM dependencies
+        run: yarn install --non-interactive
+
+      - name: Compile assets
+        run: yarn run production
+
+      - name: Execute E2E tests
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+
+      - name: Build and push Docker image
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git checkout -B deploy
-          git add -f public/
-          git commit -m "Build front-end assets"
-          git push -f origin deploy
-      - name: Deploy to production
-        uses: appleboy/ssh-action@master
-        with:
-          username: YOUR USERNAME GOES HERE
-          host: YOUR SERVER'S HOSTNAME GOES HERE
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: "cd /var/www/html && ./server_deploy.sh"
+          docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ secrets.IMAGE_NAME }}:${{ secrets.TAG }} .
+          echo ${{ secrets.DOCKER_PWD  }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+          docker push ${{ secrets.DOCKER_LOGIN }}/${{ secrets.IMAGE_NAME }}:${{ secrets.TAG }}
+
+      - name: Deploy app to Server via Docker
+        run: echo 'LOL'

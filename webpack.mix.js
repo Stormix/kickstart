@@ -1,5 +1,6 @@
 const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
+require('laravel-mix-purgecss')
 
 /*
  |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ mix
     }
   })
   .browserSync('kickstart.local')
+  .purgeCss({
+    enabled: mix.inProduction(),
+    folders: ['src', 'templates'],
+    extensions: ['html', 'js', 'php', 'vue', 'ts']
+  })
 
 if (mix.inProduction()) {
   mix.version().sourceMaps()
