@@ -9,7 +9,7 @@ on:
 jobs:
   build-backend:
     runs-on: ubuntu-latest
-    name: Laravel Tests
+    name: Build & Test & Push & Deploy
 
     steps:
       - name: Checkout code
@@ -30,6 +30,11 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-suggest
+
+      - name: Generate an application key
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
       - name: Execute backend tests
         run: ./vendor/bin/pest
