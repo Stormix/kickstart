@@ -2,6 +2,8 @@
 
 # Kickstart - A Laravel Boilerplate for personal/client projects
 
+![CI / CD](https://github.com/Stormix/kickstart/workflows/CI%20/%20CD/badge.svg)
+
 ## Introduction
 
 A very opinionated Laravel SPA boiletplate using **Laravel 7.x** / **Typescript** / **Vue (VueRouter - Vuex)**
