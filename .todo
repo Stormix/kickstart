@@ -31,4 +31,10 @@
 ☐ Annoucements
 ☐ Invoices
 ☐ Teams
-☐ Tests (Pest)
+Tests:
+  ☐ (Pest)
+  ☐ (Cypress)
+Docker:
+  ☐ Repo
+  ☐ CI/CD Actions
+  
