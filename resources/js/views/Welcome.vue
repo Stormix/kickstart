@@ -7,9 +7,7 @@
       <router-link v-if="!isLoggedIn" tag="a" to="/auth/register">
         Register
       </router-link>
-      <router-link v-if="isLoggedIn" tag="a" to="/home">
-        Welcome, {{ current.name }}
-      </router-link>
+      <router-link v-if="isLoggedIn" tag="a" to="/app"> Welcome, {{ current.name }} </router-link>
       <a v-if="isLoggedIn" href="#" @click.prevent="logout">
         Logout
       </a>

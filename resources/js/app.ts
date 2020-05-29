@@ -11,6 +11,7 @@ import Router from '@/router'
 import Store from '@/store'
 import App from '@/App.vue'
 import VueHead from 'vue-head'
+import VueClosable from 'vue-closable'
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,6 +26,7 @@ import VueHead from 'vue-head'
 
 Vue.component('example', ExampleComponent)
 Vue.use(VueHead)
+Vue.use(VueClosable)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,5 +37,5 @@ Vue.use(VueHead)
 const app = new Vue({
   router: Router,
   store: Store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')

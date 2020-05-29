@@ -14,7 +14,7 @@ class AuthHelper extends Vue {
   }
 
   logout() {
-    this.$store.dispatch('user/logout')
+    this.$store.dispatch('user/logout').then(() => this.$router.push('/'))
   }
 
   @user.Action

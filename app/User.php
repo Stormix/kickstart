@@ -2,12 +2,15 @@
 
 namespace App;
 
+use DarkGhostHunter\Laraguard\Contracts\TwoFactorAuthenticatable;
+use DarkGhostHunter\Laraguard\TwoFactorAuthentication;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenticatable
 {
+    use TwoFactorAuthentication;
     use Notifiable;
 
     /**

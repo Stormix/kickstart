@@ -1,6 +1,7 @@
+☐ Install Todo+ on vscode to preview this file
 ☐ Access Control
   ✔ Register/Login/Logout
-  ☐ 2FA
+  ☐ 2FA (using Laraguard)
   ☐ Password Reset
   ☐ Third party login (Github/Facebook/Twitter/Google/Linked In/BitBucket)
   ✔ Account Confirmation By E-mail
@@ -36,5 +37,9 @@ Tests:
   ☐ (Cypress)
 Docker:
   ☐ Repo
-  ☐ CI/CD Actions
+  ☐ CI/CD Action
+    ✔ Backend Unit/Feature testing
+    ✔ E2E testing
+    ☐ SSH deployement (deploy-app.sh)
+  
   

@@ -6,5 +6,6 @@
         "css.validate": false,
         "scss.validate": false,
         "stylelint.enable": true,
+        "editor.formatOnSave": true,
     }
 }

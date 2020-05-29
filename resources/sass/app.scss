@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
 
 // Variables
 @import 'variables';
@@ -8,7 +9,7 @@
 @import 'tailwind';
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Lato', sans-serif;
     background-color: #fff;
     color: #636b6f;
 }

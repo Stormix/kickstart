@@ -3,7 +3,7 @@
     <!-- Replace with your content -->
     <div class="px-4 py-6 sm:px-0">
       <div class="border-4 border-gray-200 border-dashed rounded-lg h-96">
-        <h1 class="text-4xl">Home Page</h1>
+        <h1 class="text-4xl">Settings</h1>
       </div>
     </div>
     <!-- /End replace -->
@@ -17,7 +17,7 @@ import GlobalHelper from '@/mixins/GlobalHelper'
 @Component({
   components: {},
 })
-export default class Home extends Mixins(GlobalHelper) {
+export default class Settings extends Mixins(GlobalHelper) {
   //
 }
 </script>

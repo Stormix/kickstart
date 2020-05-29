@@ -151,7 +151,7 @@ export default class Login extends Mixins(GlobalHelper) {
   private remember: boolean = false
   private startValidation: boolean = false
   private verify: boolean = false
-  private redirectTo: string = '/home' //TODO: make this an env variable
+  private redirectTo: string = '/app' //TODO: make this an env variable
   private error: boolean = false
   private errors: Object = {}
   private message: string | null = null
@@ -181,7 +181,7 @@ export default class Login extends Mixins(GlobalHelper) {
       this.redirectTo = `/email/verify/${id}/${hash}?expires=${expires}&signature=${signature}`
     }
     if ('redirectFrom' in this.$route.query) {
-      this.redirectTo = this.$route.query.redirectFrom.toString() || '/home'
+      this.redirectTo = this.$route.query.redirectFrom.toString() || '/app'
     }
   }
   login(): void {
