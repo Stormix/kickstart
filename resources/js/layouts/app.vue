@@ -1,18 +1,21 @@
 <template>
-  <div class="h-full">
+  <div class="flex flex-col h-full">
     <Navbar :user="current" @logout="logout" />
     <header class="bg-white">
-      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="container px-4 py-6 mx-auto sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
           {{ pageTitle }}
         </h1>
       </div>
     </header>
-    <main>
-      <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <main class="flex-1">
+      <div class="container py-6 mx-auto sm:px-6 lg:px-8">
         <router-view />
       </div>
     </main>
+    <footer>
+      <Footer />
+    </footer>
   </div>
 </template>
 
@@ -21,12 +24,14 @@ import Logo from '@/components/Logo.vue'
 import { Component, Vue, Mixins } from 'vue-property-decorator'
 import GlobalHelper from '@/mixins/GlobalHelper'
 import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 import AuthHelper from '@/mixins/AuthHelper'
 
 @Component({
   components: {
     Logo,
     Navbar,
+    Footer,
   },
 })
 export default class AppLayout extends Mixins(GlobalHelper, AuthHelper) {}

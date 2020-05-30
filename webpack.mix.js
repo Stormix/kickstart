@@ -18,7 +18,7 @@ mix
   .sass('resources/sass/app.scss', 'public/css')
   .options({
     processCssUrls: false,
-    postCss: [tailwindcss('tailwind.config.js')]
+    postCss: [tailwindcss('tailwind.config.js')],
   })
   .webpackConfig({
     resolve: {
@@ -26,17 +26,18 @@ mix
         '@': path.resolve(__dirname, 'resources/js'),
         '@@': path.resolve(__dirname, 'node_modules'),
         '@assets': path.resolve(__dirname, 'resources/assets'),
-        '@sass': path.resolve(__dirname, 'resources/sass')
-      }
-    }
+        '@sass': path.resolve(__dirname, 'resources/sass'),
+      },
+    },
   })
   .browserSync('kickstart.local')
   .purgeCss({
     enabled: mix.inProduction(),
     folders: ['src', 'templates'],
-    extensions: ['html', 'js', 'php', 'vue', 'ts']
+    extensions: ['html', 'js', 'php', 'vue', 'ts'],
   })
+  .sourceMaps()
 
 if (mix.inProduction()) {
-  mix.version().sourceMaps()
+  mix.version()
 }

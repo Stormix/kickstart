@@ -12,6 +12,7 @@ import Store from '@/store'
 import App from '@/App.vue'
 import VueHead from 'vue-head'
 import VueClosable from 'vue-closable'
+import Gravatar from 'vue-gravatar'
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +28,7 @@ import VueClosable from 'vue-closable'
 Vue.component('example', ExampleComponent)
 Vue.use(VueHead)
 Vue.use(VueClosable)
+Vue.component('v-gravatar', Gravatar)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

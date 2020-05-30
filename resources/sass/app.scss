@@ -14,50 +14,6 @@ body {
     color: #636b6f;
 }
 
-
-.form-checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-    display: inline-block;
-    vertical-align: middle;
-    background-origin: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    flex-shrink: 0;
-    height: 1rem;
-    width: 1rem;
-    color: $primary-color;
-    background-color: #ffffff;
-    border-color: #d2d6dc;
-    border-width: 1px;
-    border-radius: 0.25rem;
-
-    &:checked {
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-        border-color: transparent;
-        background-color: currentColor;
-        background-size: 100% 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px transparentize(lighten($primary-color, 10), 0.45);
-        border-color: transparentize(lighten($primary-color, 10), 0.2);
-    }
-
-    &:checked:focus {
-        border-color: transparent;
-    }
-}
-
-
 @media not print {
     .form-checkbox::-ms-check {
         border-width: 1px;

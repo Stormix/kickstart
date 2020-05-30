@@ -1,0 +1,50 @@
+<template>
+  <footer class="w-full text-gray-700 body-font">
+    <div
+      class="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row"
+    >
+      <a
+        class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start"
+      >
+        <Logo class="block w-auto h-8 my-auto" />
+
+        <span class="ml-3 text-xl">Kickstart</span>
+      </a>
+      <p
+        class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0"
+      >
+        © 2020 Kickstart —
+        <a
+          href="https://stormix.co"
+          class="ml-1 text-gray-600"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          @stormix.co
+        </a>
+      </p>
+      <span
+        class="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start"
+      >
+        <a class="text-gray-500">
+          <i class="fab fa-facebook-f" />
+        </a>
+        <a class="ml-3 text-gray-500">
+          <i class="fab fa-twitter" />
+        </a>
+      </span>
+    </div>
+  </footer>
+</template>
+
+<script lang="ts">
+import Logo from '@/components/Logo.vue'
+import { Component, Vue, Prop } from 'vue-property-decorator'
+
+@Component({
+  components: {
+    Logo,
+  },
+})
+export default class Footer extends Vue {}
+</script>

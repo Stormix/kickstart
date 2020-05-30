@@ -17,7 +17,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">  
+    <link href="{{ mix('css/all.min.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div id="app" class="h-full">

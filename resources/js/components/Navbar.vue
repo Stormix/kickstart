@@ -1,6 +1,6 @@
 <template>
   <nav class="border-b border-gray-200">
-    <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="container px-2 mx-auto sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
@@ -45,7 +45,9 @@
             </svg>
           </button>
         </div>
-        <div class="flex items-center justify-center flex-1 h-full sm:justify-start">
+        <div
+          class="flex items-center justify-center flex-1 h-full sm:justify-start"
+        >
           <div class="items-center justify-center flex-shrink-0">
             <Logo class="block w-auto h-8 my-auto" />
           </div>
@@ -79,10 +81,7 @@
                 @click="dropdown = !dropdown"
                 ref="profileToggle"
               >
-                <img
-                  class="w-8 h-8 rounded-full"
-                  :src="`https://api.adorable.io/avatars/285/${user.email}`"
-                />
+                <v-gravatar class="w-8 h-8 rounded-full" :email="user.email" />
               </button>
             </div>
             <!--
@@ -122,12 +121,16 @@
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                     to="/app/settings"
                     active-class="text-white bg-blue-700"
-                  >Settings</router-link>
+                  >
+                    Settings
+                  </router-link>
                   <a
                     href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                     @click.prevent="logout"
-                  >Sign out</a>
+                  >
+                    Sign out
+                  </a>
                 </div>
               </div>
             </transition>
@@ -149,7 +152,8 @@
           :to="item.path"
           class="block px-3 py-2 mt-1 text-base font-medium transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-900"
           exactActiveClass="block px-3 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-gray-900 rounded-md"
-        >{{ item.name }}</router-link>
+          >{{ item.name }}</router-link
+        >
       </div>
     </div>
   </nav>

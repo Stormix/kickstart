@@ -93,7 +93,7 @@
               v-model="remember"
               id="remember"
               type="checkbox"
-              class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
+              class="w-4 h-4 transition duration-150 ease-in-out text-primary form-checkbox"
             />
 
             <label
@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <div class="mt-6">
+        <div class="my-6">
           <span class="block w-full rounded-md shadow-sm">
             <button
               type="submit"
@@ -132,6 +132,22 @@
               Sign in
             </button>
           </span>
+        </div>
+         <div class="grid gap-0 mb-6 sm:grid-cols-3">
+            <hr class="hidden mt-3 border-gray-400 sm:block">
+            <span class="text-sm font-normal text-center text-gray-700 bg-white">Or continue with</span>
+            <hr class="hidden mt-3 border-gray-400 sm:block">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+            <button type="button" class="relative w-full py-1 text-sm font-semibold text-center text-gray-600 transition-all duration-200 border border-gray-400 border-solid rounded shadow-sm focus:outline-none hover:border-indigo-600">
+                <i class="text-lg fab fa-google" style="line-height: 28px;"></i>
+            </button>
+            <button type="button" class="relative w-full px-0 py-1 text-sm font-semibold text-center text-gray-600 transition-all duration-200 border border-gray-400 border-solid rounded shadow-sm focus:outline-none hover:border-indigo-600">
+                <i class="text-lg fab fa-twitter" style="line-height: 28px;"></i>
+            </button>
+            <button type="button" class="relative w-full px-0 py-1 text-sm font-semibold text-center text-gray-600 transition-all duration-200 border border-gray-400 border-solid rounded shadow-sm focus:outline-none hover:border-indigo-600">
+                <i class="text-lg fab fa-linkedin" style="line-height: 28px;"></i>
+            </button>
         </div>
       </form>
     </div>

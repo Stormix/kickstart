@@ -21,13 +21,10 @@
 ☐ User Dashboard
 ☐ Administration Dashboard
 ☐ Localization / Vue i18n.
-☐ Gravatar
-☐ Laravel Debugbar
-☐ Laravel Telescope
-☐ Event subscribers
+✔ Gravatar
+✔ Laravel Telescope 
+✔ Sentry
 ☐ Google reCaptcha
-☐ Timezone Support
-☐ Sentry
 ☐ Subscriptions & Biling
 ☐ Annoucements
 ☐ Invoices
