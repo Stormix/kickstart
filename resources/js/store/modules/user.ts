@@ -54,7 +54,7 @@ class User extends VuexModule {
     })
   }
   @Action({ rawError: true })
-  logout() {
+  logout(): Promise<void> {
     return axios
       .post('/logout')
       .then(() => this.context.commit('unsetCurrentUser'))

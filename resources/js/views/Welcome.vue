@@ -28,7 +28,7 @@ export default class Welcome extends Mixins(GlobalHelper, AuthHelper) {
     </div>
 
     <div class="content">
-      <div class="title m-b-md">Kickstart {{ $t('auth.throttle') }}</div>
+      <div class="title m-b-md">Kickstart</div>
 
       <div class="links">
         <a href="#">Docs</a>

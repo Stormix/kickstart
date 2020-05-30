@@ -44,6 +44,7 @@
     },
     "dependencies": {
         "@tailwindcss/ui": "^0.3.0",
+        "axios-auth-refresh": "^2.2.6",
         "laravel-vue-lang": "^3.0.0-alpha",
         "stylelint-config-recommended": "^3.0.0",
         "tailwindcss": "^1.4.6",
