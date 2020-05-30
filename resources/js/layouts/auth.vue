@@ -1,24 +1,31 @@
 <template>
   <div class="h-full">
-    <div class="flex flex-col justify-center min-h-screen py-12 layout sm:px-6 lg:px-8">
+    <div
+      class="flex flex-col justify-center min-h-screen py-12 layout sm:px-6 lg:px-8"
+    >
       <div class="flex flex-col sm:mx-auto sm:w-full sm:max-w-md">
         <a href="/" class="mx-auto">
           <Logo class="w-auto h-16 text-indigo-600" />
         </a>
 
-        <h2 class="mt-6 text-3xl font-extrabold leading-9 text-center text-gray-900">{{ title }}</h2>
+        <h2
+          class="mt-6 text-3xl font-extrabold leading-9 text-center text-gray-900"
+        >
+          {{ title }}
+        </h2>
         <p class="mt-2 text-sm leading-5 text-center text-gray-600 max-w">
           Or
           <router-link
             tag="a"
             :to="subtitleLink"
             class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
-          >{{ subtitle }}</router-link>
+            >{{ subtitle }}</router-link
+          >
         </p>
       </div>
 
       <div>
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
   </div>

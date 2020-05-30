@@ -26,10 +26,10 @@ import Lang from 'laravel-vue-lang'
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example', ExampleComponent)
+Vue.component('Example', ExampleComponent)
 Vue.use(VueHead)
 Vue.use(VueClosable)
-Vue.component('v-gravatar', Gravatar)
+Vue.component('VGravatar', Gravatar)
 Vue.use(Lang, {
   locale: 'en',
   fallback: 'en',
@@ -41,6 +41,7 @@ Vue.use(Lang, {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = new Vue({
   router: Router,
   store: Store,

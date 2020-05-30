@@ -6,7 +6,7 @@ const errors: { [key: string]: string } = {
   MISSING: 'Missing fields.',
   ALREADY_EXISTS: 'A user with this email address already exists.',
   MISSING_TOKEN: 'Missing token. Try again later or contact founders.',
-  BAD_TOKEN: 'Invalid/Expired token. Try again later or contact founders.'
+  BAD_TOKEN: 'Invalid/Expired token. Try again later or contact founders.',
 }
 
 import { Component, Vue } from 'vue-property-decorator'
@@ -16,8 +16,8 @@ class GlobalHelper extends Vue {
   public head() {
     return {
       title: {
-        inner: this.pageTitle
-      }
+        inner: this.pageTitle,
+      },
     }
   }
   get pageTitle(): string {
@@ -31,8 +31,9 @@ class GlobalHelper extends Vue {
     if (error && error.response && error.response.status <= 422) {
       return `${error.response.data.message || 'Not provided'}`
     } else {
-      return `Something went wrong. Error: ${error.response?.data.error ||
-        'Not provided'}`
+      return `Something went wrong. Error: ${
+        error.response?.data.error || 'Not provided'
+      }`
     }
   }
 }

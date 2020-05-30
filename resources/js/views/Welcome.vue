@@ -1,3 +1,15 @@
+<script lang="ts">
+import { Component, Mixins } from 'vue-property-decorator'
+import GlobalHelper from '@/mixins/GlobalHelper'
+import AuthHelper from '@/mixins/AuthHelper'
+
+@Component
+export default class Welcome extends Mixins(GlobalHelper, AuthHelper) {
+  mounted(): void {
+    this.getCurrentUser()
+  }
+}
+</script>
 <template>
   <div class="w-full h-full flex-center position-ref">
     <div class="top-right links">
@@ -26,18 +38,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import GlobalHelper from '@/mixins/GlobalHelper'
-import AuthHelper from '@/mixins/AuthHelper'
-
-@Component
-export default class Welcome extends Mixins(GlobalHelper, AuthHelper) {
-  mounted(): void {
-    this.getCurrentUser()
-  }
-}
-</script>
 <style lang="scss" scoped>
 .flex-center {
   align-items: center;

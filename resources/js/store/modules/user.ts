@@ -20,7 +20,7 @@ class User extends VuexModule {
       name,
       email,
       password,
-      password_confirmation: password
+      password_confirmation: password,
     })
   }
   @Action({ rawError: true })
@@ -31,7 +31,7 @@ class User extends VuexModule {
       .post('/login', {
         email,
         password,
-        remember // Not used for now
+        remember, // Not used for now
       })
       .then(({ status }) => {
         if (status == 204) {
@@ -50,7 +50,7 @@ class User extends VuexModule {
   @Action({ rawError: true })
   public async forgotPassword(email: string): Promise<void> {
     return axios.post('/password/email', {
-      email
+      email,
     })
   }
   @Action({ rawError: true })

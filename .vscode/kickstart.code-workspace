@@ -6,6 +6,16 @@
         "css.validate": false,
         "scss.validate": false,
         "stylelint.enable": true,
-        "editor.formatOnSave": true,
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "javascript.format.enable": false,
+        "eslint.alwaysShowStatus": true,
+        "eslint.options": {
+          "extensions": [ ".html", ".js", ".vue", ".jsx" ]
+        }, 
+        "vetur.validation.script": false,
+        "vetur.validation.template": false,
     }
 }

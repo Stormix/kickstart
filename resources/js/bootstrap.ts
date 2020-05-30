@@ -8,7 +8,7 @@ import axios from 'axios'
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.withCredentials = true
-let token: HTMLMetaElement | null = document.head.querySelector(
+const token: HTMLMetaElement | null = document.head.querySelector(
   'meta[name="csrf-token"]'
 )
 if (token) {

@@ -1,3 +1,40 @@
+<script lang="ts">
+import Logo from '@/components/Logo.vue'
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
+  components: {
+    Logo,
+  },
+  props: {
+    user: {
+      type: Object || null,
+      required: true,
+    },
+  },
+})
+export default class Navbar extends Vue {
+  private open = false
+  private dropdown = false
+  private menuItems: Array<{ [key: string]: string }> = [
+    {
+      name: 'Dashboard',
+      path: '/app',
+    },
+    {
+      name: 'Settings',
+      path: '/app/settings',
+    },
+  ]
+  closeProfileDropdown(): void {
+    this.dropdown = false
+  }
+  logout(): void {
+    this.$emit('logout')
+  }
+}
+</script>
+
 <template>
   <nav class="border-b border-gray-200">
     <div class="container px-2 mx-auto sm:px-6 lg:px-8">
@@ -60,9 +97,11 @@
                 :to="item.path"
                 :class="{ 'ml-5': index > 0 }"
                 class="relative z-10 flex px-3 py-2 ml-4 leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-white hover:text-gray-900 hover:border-indigo-600"
-                exactActiveClass="px-3 py-2 font-bold leading-5 text-gray-900 transition duration-150 ease-in-out border-indigo-600"
+                exact-active-class="px-3 py-2 font-bold leading-5 text-gray-900 transition duration-150 ease-in-out border-indigo-600"
               >
-                <div class="block my-auto">{{ item.name }}</div>
+                <div class="block my-auto">
+                  {{ item.name }}
+                </div>
               </router-link>
             </div>
           </div>
@@ -74,14 +113,14 @@
           <div v-if="user" class="relative ml-3">
             <div>
               <button
-                class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-white"
                 id="user-menu"
+                ref="profileToggle"
+                class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-white"
                 aria-label="User menu"
                 aria-haspopup="true"
                 @click="dropdown = !dropdown"
-                ref="profileToggle"
               >
-                <v-gravatar class="w-8 h-8 rounded-full" :email="user.email" />
+                <v-gravatar :email="user.email" class="w-8 h-8 rounded-full" />
               </button>
             </div>
             <!--
@@ -151,47 +190,11 @@
           tag="a"
           :to="item.path"
           class="block px-3 py-2 mt-1 text-base font-medium transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-900"
-          exactActiveClass="block px-3 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-gray-900 rounded-md"
-          >{{ item.name }}</router-link
+          exact-active-class="block px-3 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-gray-900 rounded-md"
         >
+          {{ item.name }}
+        </router-link>
       </div>
     </div>
   </nav>
 </template>
-
-<script lang="ts">
-import Logo from '@/components/Logo.vue'
-import { Component, Vue } from 'vue-property-decorator'
-
-@Component({
-  components: {
-    Logo,
-  },
-  props: {
-    user: {
-      type: Object || null,
-      required: true,
-    },
-  },
-})
-export default class Navbar extends Vue {
-  private open: Boolean = false
-  private dropdown: Boolean = false
-  private menuItems: Array<Object> = [
-    {
-      name: 'Dashboard',
-      path: '/app',
-    },
-    {
-      name: 'Settings',
-      path: '/app/settings',
-    },
-  ]
-  closeProfileDropdown(): void {
-    this.dropdown = false
-  }
-  logout(): void {
-    this.$emit('logout')
-  }
-}
-</script>
