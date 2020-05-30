@@ -6,6 +6,10 @@
 
 A very opinionated Laravel SPA boiletplate using **Laravel 7.x + Sanctum** / **Typescript** / **Vue (VueRouter - Vuex)** / **TailwindCSS** / **Pest & Cypress**
 
+## Features / ToDo:
+
+Check the [.todo](./.todo) file for the current feature set.
+
 ## Prerequisites
 
 - PHP 7.3

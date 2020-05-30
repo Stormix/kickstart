@@ -43,6 +43,7 @@
     },
     "dependencies": {
         "@tailwindcss/ui": "^0.3.0",
+        "laravel-vue-lang": "^3.0.0-alpha",
         "stylelint-config-recommended": "^3.0.0",
         "tailwindcss": "^1.4.6",
         "vue-class-component": "^7.2.3",

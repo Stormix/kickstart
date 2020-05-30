@@ -1,6 +1,7 @@
 const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 require('laravel-mix-purgecss')
+require('laravel-vue-lang/mix')
 
 /*
  |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ mix
     extensions: ['html', 'js', 'php', 'vue', 'ts'],
   })
   .sourceMaps()
+  .lang()
 
 if (mix.inProduction()) {
   mix.version()

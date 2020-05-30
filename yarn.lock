@@ -5151,6 +5151,11 @@ jsesc@~0.5.0:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
+json-loader@^0.5.4:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
+  integrity sha512-QLPs8Dj7lnf3e3QYS1zkCo+4ZwqOiF9d/nZnYozTISxXWCfNs9yuky5rJw4/W34s7POaNlbZmQGaB5NiXCbP4w==
+
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -5248,6 +5253,19 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+lang.js@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/lang.js/-/lang.js-1.1.14.tgz#96329c064c18f8d5e1299d79d827a368af08c710"
+  integrity sha512-HsNKw3b7tYHwDQux3lQtbLGAntwJ5fl8Pl1BPXTKu+gdpaZsK9d787yFmLi6/LSXeNSgPO1CjZDKkrrPsERbSw==
+
+laravel-localization-loader@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/laravel-localization-loader/-/laravel-localization-loader-1.0.5.tgz#aef66e121ec0f92831ab6de3d7fb382f9c9b0593"
+  integrity sha512-2RtkFoVIWqhtCTQ+bwmiYgPhD9Z0pv3ShZMU20lE9W7KwSXE39dzLMsz+v35Uq2o6+3BwJ6Sy0KNzL4xJJMrHA==
+  dependencies:
+    json-loader "^0.5.4"
+    php-array-loader "^1.0.0"
+
 laravel-mix-purgecss@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/laravel-mix-purgecss/-/laravel-mix-purgecss-5.0.0.tgz#4fb1b7371702948f0441d690415f270aa147aec1"
@@ -5298,6 +5316,15 @@ laravel-mix@^5.0.1:
     webpack-merge "^4.1.0"
     webpack-notifier "^1.5.1"
     yargs "^12.0.5"
+
+laravel-vue-lang@^3.0.0-alpha:
+  version "3.0.0-alpha"
+  resolved "https://registry.yarnpkg.com/laravel-vue-lang/-/laravel-vue-lang-3.0.0-alpha.tgz#f2efd80dd88ef46a4f23745553ac0acd4718e1d1"
+  integrity sha512-2Cyxyei0d7IF0ZbMYFBIHoVSq5ttIvEBFfGVzyKrkbeRb2rAFbSVAy50cs2DIuJNDQ/Fr7E9fkuWvNUueHZ28g==
+  dependencies:
+    lang.js "^1.1.14"
+    laravel-localization-loader "^1.0.5"
+    vue "^2.6.10"
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -6632,6 +6659,25 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+
+php-array-loader@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/php-array-loader/-/php-array-loader-1.0.1.tgz#78173cc8aadbda57b8491f5dffe144afb9eadd71"
+  integrity sha1-eBc8yKrb2le4SR9d/+FEr7nq3XE=
+  dependencies:
+    php-array-parser "^1.0.0"
+
+php-array-parser@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/php-array-parser/-/php-array-parser-1.0.1.tgz#9da12683c3bebbe228a7e238c716435437631eaa"
+  integrity sha512-elnanzvSd/+U2eWD9Hp2MIab6LzWlnp9J+sTrQasDoR6VsWMDa3fDYBS8pojvu3RwPbpgDUHUxV5WGhfJ1NewQ==
+  dependencies:
+    php-parser "^2.0.3"
+
+php-parser@^2.0.3:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/php-parser/-/php-parser-2.2.0.tgz#67384f0a5933dbbef40beab0ab31d0b8c582ff88"
+  integrity sha1-ZzhPClkz2770C+qwqzHQuMWC/4g=
 
 picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
@@ -9121,7 +9167,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.5.17:
+vue@^2.5.17, vue@^2.6.10:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==

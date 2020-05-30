@@ -13,6 +13,7 @@ import App from '@/App.vue'
 import VueHead from 'vue-head'
 import VueClosable from 'vue-closable'
 import Gravatar from 'vue-gravatar'
+import Lang from 'laravel-vue-lang'
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,6 +30,10 @@ Vue.component('example', ExampleComponent)
 Vue.use(VueHead)
 Vue.use(VueClosable)
 Vue.component('v-gravatar', Gravatar)
+Vue.use(Lang, {
+  locale: 'en',
+  fallback: 'en',
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

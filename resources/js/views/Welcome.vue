@@ -7,16 +7,16 @@
       <router-link v-if="!isLoggedIn" tag="a" to="/auth/register">
         Register
       </router-link>
-      <router-link v-if="isLoggedIn" tag="a" to="/app"> Welcome, {{ current.name }} </router-link>
+      <router-link v-if="isLoggedIn" tag="a" to="/app">
+        Welcome, {{ current.name }}
+      </router-link>
       <a v-if="isLoggedIn" href="#" @click.prevent="logout">
         Logout
       </a>
     </div>
 
     <div class="content">
-      <div class="title m-b-md">
-        Kickstart
-      </div>
+      <div class="title m-b-md">Kickstart {{ $t('auth.throttle') }}</div>
 
       <div class="links">
         <a href="#">Docs</a>

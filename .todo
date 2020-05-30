@@ -29,6 +29,8 @@
 ☐ Annoucements
 ☐ Invoices
 ☐ Teams
+Translations:
+  ✔ Initial setup 
 Tests:
   ☐ (Pest)
   ☐ (Cypress)
