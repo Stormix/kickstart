@@ -1,3 +1,20 @@
+<script lang="ts">
+import Logo from '@/components/Logo.vue'
+import { Component, Mixins } from 'vue-property-decorator'
+import GlobalHelper from '@/mixins/GlobalHelper'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import AuthHelper from '@/mixins/AuthHelper'
+
+@Component({
+  components: {
+    Logo,
+    Navbar,
+    Footer,
+  },
+})
+export default class AppLayout extends Mixins(GlobalHelper, AuthHelper) {}
+</script>
 <template>
   <div class="flex flex-col h-full">
     <Navbar :user="current" @logout="logout" />
@@ -18,21 +35,3 @@
     </footer>
   </div>
 </template>
-
-<script lang="ts">
-import Logo from '@/components/Logo.vue'
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import GlobalHelper from '@/mixins/GlobalHelper'
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
-import AuthHelper from '@/mixins/AuthHelper'
-
-@Component({
-  components: {
-    Logo,
-    Navbar,
-    Footer,
-  },
-})
-export default class AppLayout extends Mixins(GlobalHelper, AuthHelper) {}
-</script>

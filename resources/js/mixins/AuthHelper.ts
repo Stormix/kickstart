@@ -1,24 +1,24 @@
 import { Component, Vue } from 'vue-property-decorator'
-import { AxiosError, AxiosResponse } from 'axios'
 import { namespace } from 'vuex-class'
+import { UserModel } from '@/types/store'
 
 const user = namespace('user')
 
 @Component
 class AuthHelper extends Vue {
   @user.State
-  public current!: any
+  public current!: UserModel | null
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return !!this.current || false
   }
 
-  logout() {
+  logout(): void {
     this.$store.dispatch('user/logout').then(() => this.$router.push('/'))
   }
 
   @user.Action
-  getCurrentUser!: () => any
+  getCurrentUser!: () => Promise<boolean>
 }
 
 export default AuthHelper

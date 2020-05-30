@@ -8,7 +8,6 @@ import Login from '@/views/auth/Login.vue'
 import Register from '@/views/auth/Register.vue'
 import Reset from '@/views/auth/Reset.vue'
 import Forgot from '@/views/auth/Forgot.vue'
-import Profile from '@/views/Profile.vue'
 import Settings from '@/views/Settings.vue'
 import store from '@/store'
 

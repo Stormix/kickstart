@@ -31,7 +31,6 @@ if (token) {
 // the app recieves a token mismatch error
 const refreshCSRFToken = () => {
   return new Promise((resolve, reject): void => {
-    console.log('Token expired, fetching a new one')
     axios
       .get('/')
       .then(({ data }) => {

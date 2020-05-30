@@ -1,3 +1,14 @@
+<script lang="ts">
+import { Component, Mixins } from 'vue-property-decorator'
+import GlobalHelper from '@/mixins/GlobalHelper'
+
+@Component({
+  components: {},
+})
+export default class Home extends Mixins(GlobalHelper) {
+  //
+}
+</script>
 <template>
   <div class="w-full h-full">
     <!-- Replace with your content -->
@@ -9,15 +20,3 @@
     <!-- /End replace -->
   </div>
 </template>
-
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import GlobalHelper from '@/mixins/GlobalHelper'
-
-@Component({
-  components: {},
-})
-export default class Home extends Mixins(GlobalHelper) {
-  //
-}
-</script>

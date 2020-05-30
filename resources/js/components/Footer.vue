@@ -1,3 +1,14 @@
+<script lang="ts">
+import Logo from '@/components/Logo.vue'
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
+  components: {
+    Logo,
+  },
+})
+export default class Footer extends Vue {}
+</script>
 <template>
   <footer class="w-full text-gray-700 body-font">
     <div
@@ -36,15 +47,3 @@
     </div>
   </footer>
 </template>
-
-<script lang="ts">
-import Logo from '@/components/Logo.vue'
-import { Component, Vue, Prop } from 'vue-property-decorator'
-
-@Component({
-  components: {
-    Logo,
-  },
-})
-export default class Footer extends Vue {}
-</script>

@@ -4,7 +4,7 @@ import { UserModel } from '@/types/store'
 
 @Module({ namespaced: true })
 class User extends VuexModule {
-  public current: any = null
+  public current: UserModel | null = null
   @Mutation
   public setCurrentUser(user: UserModel): void {
     this.current = user

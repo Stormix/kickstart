@@ -1,3 +1,12 @@
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator'
+
+@Component
+export default class Logo extends Vue {
+  @Prop() readonly title!: string
+  @Prop({ default: '#667EEA' }) readonly color!: string
+}
+</script>
 <template>
   <div class="flex h-full">
     <!-- "Laravel" and the "Laravel Logo" are Trademarks of Taylor Otwell. Copyright © 2011-2020 Laravel LLC. -->
@@ -16,15 +25,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
-
-@Component
-export default class Logo extends Vue {
-  @Prop() readonly title!: string
-  @Prop({ default: '#667EEA' }) readonly color!: string
-}
-</script>
 <style lang="scss" scoped>
 .brand {
   font-family: 'Nunito', sans-serif;

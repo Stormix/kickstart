@@ -10,15 +10,18 @@ const errors: { [key: string]: string } = {
 }
 
 import { Component, Vue } from 'vue-property-decorator'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 @Component
 class GlobalHelper extends Vue {
-  public head() {
+  public head(): { [key: string]: { [key: string]: string } } {
     return {
       title: {
         inner: this.pageTitle,
       },
     }
+  }
+  get authErrors(): { [key: string]: string } {
+    return errors
   }
   get pageTitle(): string {
     return this.$route.meta?.title

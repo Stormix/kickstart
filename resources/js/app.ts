@@ -6,7 +6,6 @@
 
 import '@/bootstrap'
 import Vue from 'vue'
-import ExampleComponent from '@/components/ExampleComponent.vue'
 import Router from '@/router'
 import Store from '@/store'
 import App from '@/App.vue'
@@ -26,7 +25,6 @@ import Lang from 'laravel-vue-lang'
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('Example', ExampleComponent)
 Vue.use(VueHead)
 Vue.use(VueClosable)
 Vue.component('VGravatar', Gravatar)
