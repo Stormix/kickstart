@@ -31,7 +31,7 @@ Check the [.todo](./.todo) file for the current feature set.
 
 If you didn't set a virtual host, launch application with the `php artisan serve` command. By default, application will be served at `http://127.0.0.1:8000`
 
-## Configuring
+## Configuration
 
 ## Testing
 
