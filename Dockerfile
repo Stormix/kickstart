@@ -74,7 +74,7 @@ RUN composer install \
 # install all frontend dependencies
 RUN /root/.yarn/bin/yarn
 
-# compile the frontend 
+# compile the frontend
 RUN /root/.yarn/bin/yarn production
 
 # Copy existing application directory permissions

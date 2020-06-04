@@ -20,7 +20,7 @@
     ☐ Impersonate User
 ☐ User Dashboard
 ☐ Administration Dashboard
-☐ Localization / Vue i18n.
+☐ Localization
 ✔ Gravatar
 ✔ Laravel Telescope 
 ✔ Sentry
@@ -36,6 +36,7 @@ Tests:
   ☐ (Cypress)
 Docker:
   ☐ Repo
+  ☐ CapRover version (WIP)
   ☐ CI/CD Action
     ✔ Backend Unit/Feature testing
     ✔ E2E testing

@@ -40,6 +40,8 @@ If you didn't set a virtual host, launch application with the `php artisan serve
 ### Cypress
 
 ## Docker
+### Standalone
+### CapRover Ready
 
 ## CI / CD
 

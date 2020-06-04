@@ -23,6 +23,9 @@ module.exports = {
           default: '#5850ec',
         },
       },
+      spacing: {
+        '96': '24rem',
+      },
     },
   },
   variants: {},
