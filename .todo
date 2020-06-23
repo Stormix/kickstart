@@ -20,7 +20,6 @@
     ☐ Impersonate User
 ☐ User Dashboard
 ☐ Administration Dashboard
-☐ Localization
 ✔ Gravatar
 ✔ Laravel Telescope 
 ✔ Sentry
@@ -29,7 +28,7 @@
 ☐ Annoucements
 ☐ Invoices
 ☐ Teams
-Translations:
+Translations / Localization:
   ✔ Initial setup 
 Tests:
   ☐ (Pest)

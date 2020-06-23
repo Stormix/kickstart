@@ -43,7 +43,7 @@ class User extends VuexModule {
   public async getCurrentUser(): Promise<boolean> {
     return axios
       .get('/api/user')
-      .then(({ data }) => this.context.commit('setCurrentUser', data))
+      .then(({ data }) => this.context.commit('setCurrentUser', data.data))
       .then(() => true)
       .catch(() => false)
   }

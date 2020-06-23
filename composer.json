@@ -21,6 +21,7 @@
     },
     "require-dev": {
         "facade/ignition": "^2.0",
+        "fruitcake/laravel-telescope-toolbar": "^1.2",
         "fzaninotto/faker": "^1.9.1",
         "laravel/telescope": "^3.5",
         "matt-allan/laravel-code-style": "^0.5.1",

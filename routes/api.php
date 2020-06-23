@@ -14,7 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('verified');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/user','API\UserController@getCurrentUser');
+    Route::get('/user/2fa/prepare','API\UserController@prepareTwoFactor');
+    Route::get('/user/2fa/confirm','API\UserController@confirmTwoFactor');
+    Route::get('/user/2fa/refresh','API\UserController@refreshRecoveryCodes');
+    Route::get('/user/2fa/disable','API\UserController@disableTwoFactorAuth');
+
+    Route::put('/user/info', 'API\UserController@updateUserProfile');
+    Route::put('/user/password', 'API\UserController@updateUserPassword');
+});
+
 // Broadcast::routes(['middleware' => ['auth:sanctum']]);

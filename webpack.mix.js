@@ -31,7 +31,10 @@ mix
       },
     },
   })
-  .browserSync('kickstart.local')
+  .browserSync({
+    proxy: 'kickstart.local',
+    cors: true,
+  })
   .purgeCss({
     enabled: mix.inProduction(),
     folders: ['src', 'templates'],

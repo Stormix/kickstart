@@ -16,16 +16,16 @@ import AuthHelper from '@/mixins/AuthHelper'
 export default class AppLayout extends Mixins(GlobalHelper, AuthHelper) {}
 </script>
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full bg-gray-50">
     <Navbar :user="current" @logout="logout" />
-    <header class="bg-white">
+    <header>
       <div class="container px-4 py-6 mx-auto sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
           {{ pageTitle }}
         </h1>
       </div>
     </header>
-    <main class="flex-1">
+    <main class="flex-1 bg-gray-50">
       <div class="container py-6 mx-auto sm:px-6 lg:px-8">
         <router-view />
       </div>

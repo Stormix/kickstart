@@ -36,7 +36,7 @@ export default class Navbar extends Vue {
 </script>
 
 <template>
-  <nav class="border-b border-gray-200">
+  <nav class="bg-white border-b border-gray-200">
     <div class="container px-2 mx-auto sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
