@@ -46,6 +46,7 @@
         "@tailwindcss/ui": "^0.3.0",
         "axios-auth-refresh": "^2.2.6",
         "laravel-vue-lang": "^3.0.0-alpha",
+        "postcss-import": "^12.0.1",
         "stylelint-config-recommended": "^3.0.0",
         "tailwindcss": "^1.4.6",
         "vue-class-component": "^7.2.3",
@@ -54,6 +55,7 @@
         "vue-head": "^2.2.0",
         "vue-property-decorator": "^8.4.2",
         "vue-router": "^3.1.6",
+        "vue-sweetalert2": "^3.0.5",
         "vuex": "^3.4.0"
     }
 }

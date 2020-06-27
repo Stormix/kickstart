@@ -11,4 +11,7 @@
             "@/*": ["resources/js/*"]
         }
     },
+    "types": [
+        "vue-sweetalert2"
+    ],
 }

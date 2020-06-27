@@ -23,3 +23,34 @@ body {
         border-radius: inherit;
     }
 }
+
+.swal2-actions {
+    @apply grid col-gap-6 grid-cols-2 px-10;
+}
+.swal2-confirm{
+    @apply px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md;
+
+    &:hover{
+        @apply bg-indigo-700;
+    }
+    &:focus{
+        @apply outline-none border-indigo-700 shadow-outline-indigo;
+    }
+    &:active{
+        @apply bg-indigo-700;
+    }
+}
+
+.swal2-cancel{
+    @apply px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md;
+
+    &:hover{
+        @apply bg-red-700;
+    }
+    &:focus{
+        @apply outline-none border-red-700 shadow-outline-red;
+    }
+    &:active{
+        @apply bg-red-700;
+    }
+}

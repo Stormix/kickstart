@@ -13,6 +13,9 @@ import VueHead from 'vue-head'
 import VueClosable from 'vue-closable'
 import Gravatar from 'vue-gravatar'
 import Lang from 'laravel-vue-lang'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,7 +35,7 @@ Vue.use(Lang, {
   locale: 'en',
   fallback: 'en',
 })
-
+Vue.use(VueSweetalert2)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

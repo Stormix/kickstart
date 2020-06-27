@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bf6cd11b69776d2dae9a509ad4555bc",
+    "content-hash": "87b54beeb1f57d9e145fa0b53569ba17",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -262,16 +262,16 @@
         },
         {
             "name": "darkghosthunter/laraguard",
-            "version": "v1.3.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DarkGhostHunter/Laraguard.git",
-                "reference": "511036364d1b06d7768c0737adc1f31a78119120"
+                "reference": "3072728e568c5e1e33c334f32a2b713a55f4a556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DarkGhostHunter/Laraguard/zipball/511036364d1b06d7768c0737adc1f31a78119120",
-                "reference": "511036364d1b06d7768c0737adc1f31a78119120",
+                "url": "https://api.github.com/repos/DarkGhostHunter/Laraguard/zipball/3072728e568c5e1e33c334f32a2b713a55f4a556",
+                "reference": "3072728e568c5e1e33c334f32a2b713a55f4a556",
                 "shasum": ""
             },
             "require": {
@@ -320,7 +320,7 @@
                 "laraguard",
                 "laravel"
             ],
-            "time": "2020-05-09T21:07:50+00:00"
+            "time": "2020-06-08T19:26:08+00:00"
         },
         {
             "name": "dasprid/enum",

@@ -30,6 +30,9 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
   public password_current: string | null | undefined = null
   public password: string | null | undefined = null
   public password_confirm: string | null | undefined = null
+  public showQR = false
+  public QRurl = ''
+  public passcode = ''
 
   get user(): UserModel | null {
     return this.current
@@ -51,7 +54,28 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
   }
 
   updatePersonalInformation(): void {
-    console.log(this.name, this.email)
+    this.$store
+      .dispatch('user/updateUserProfile', {
+        name: this.name,
+        email: this.email,
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          this.$store.commit('user/update', response.data.data)
+          this.$swal({
+            icon: 'success',
+            title: 'Saved !',
+            text: 'Your profile has been updated.',
+          })
+        }
+      })
+      .catch((error) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: this.handleError(error),
+        })
+      })
   }
 
   updatePassword(): void {
@@ -59,7 +83,68 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
   }
 
   enable2FA(): void {
-    console.log('Enabled')
+    if (!this.user || !this.user['2fa']) {
+      this.$store
+        .dispatch('user/prepareTwoFactor')
+        .then(() => {
+          this.generateImageFrom(this.QR?.as_qr_code)
+          this.showQR = true
+        })
+        .catch((error) => {
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: this.handleError(error),
+          })
+        })
+    }
+  }
+
+  generateImageFrom(svg: string | undefined): void {
+    if (!svg) {
+      return
+    }
+    let blob = new Blob([svg], { type: 'image/svg+xml' })
+    this.QRurl = URL.createObjectURL(blob)
+  }
+
+  confirm2FA(): void {
+    this.$store
+      .dispatch('user/confirmTwoFactor', this.passcode)
+      .then(() => {
+        if (!this.recoveryCodes) {
+          throw new Error('Missing recovery codes')
+        }
+        let codes = this.recoveryCodes.map(
+          (i: { [key: string]: string }) => `<li>${i.code}</li>`
+        )
+        this.showQR = false
+        this.$swal({
+          title: 'Two-Factor authentication enabled!',
+          icon: 'success',
+          html: `Here are your recovery codes, make sure you copy 
+          them somewhere safe. <ul>${codes.join(' ')}</ul>`,
+        })
+      })
+      .catch((error) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          html: this.handleError(error),
+        })
+      })
+  }
+
+  disable2FA(): void {
+    this.$store
+      .dispatch('user/disableTwoFactorAuth', this.passcode)
+      .catch((error) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          html: this.handleError(error),
+        })
+      })
   }
 }
 </script>
@@ -217,9 +302,48 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
           </template>
           <template #content>
             <div class="w-full my-auto">
-              <div v-if="!user['2fa']" class="">
+              <div v-if="!user['2fa'] && !showQR" class="">
                 You should enable 2FA first.
               </div>
+              <div v-else-if="showQR" class="flex flex-row">
+                <div class="">
+                  <h2 class="text-2xl">Enable Two-factor Authentication</h2>
+                  Now that you enabled two factor authentication, you'll need to
+                  go through the following steps to use it.
+                  <ol class="mt-10 ml-6 list-decimal">
+                    <li>
+                      Download a two-factor authentication app like
+                      <a href="#" class="underline text-primary">
+                        Google Authenticator
+                      </a>
+                    </li>
+                    <li>
+                      Scan the QR code, or enter this key
+                      <code class="font-bold">{{ QR.as_string }}</code>
+                      into your two factor autentication app.
+                    </li>
+                    <li>
+                      After you scan the QR code or input the key above, your
+                      two factor authentication app will provide you with a
+                      unique passcode. Enter that below.
+                    </li>
+                  </ol>
+
+                  <div class="mt-4">
+                    <div class="w-full px-3 mb-4">
+                      <input
+                        v-model="passcode"
+                        class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                        type="text"
+                        placeholder="******"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <img :src="QRurl" />
+              </div>
+
               <div v-else class="">
                 Ay lmao
               </div>
@@ -228,11 +352,28 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
           <template #footer>
             <div class="flex-1" />
             <button
+              v-if="!user['2fa'] && !showQR"
               type="submit"
               class="justify-center float-right px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
               @click="enable2FA"
             >
-              {{ !user['2fa'] ? 'Enable 2FA' : 'Disable 2FA' }}
+              Enable 2FA
+            </button>
+            <button
+              v-if="user['2fa']"
+              type="submit"
+              class="justify-center float-right px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+              @click="disable2FA"
+            >
+              Disable 2FA
+            </button>
+            <button
+              v-if="showQR"
+              type="submit"
+              class="justify-center float-right px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+              @click="confirm2FA"
+            >
+              Confirm Code
             </button>
           </template>
         </Card>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller
 {
@@ -15,20 +16,25 @@ class UserController extends Controller
 
     public function prepareTwoFactor(Request $request)
     {
+        // TODO: check if not already enabled
+        // else
         $secret = $request->user()->createTwoFactorAuth();
 
-        return [
-            'as_qr_code' => $secret->toQr(),     // As QR Code
-            'as_uri'     => $secret->toUri(),    // As "otpauth://" URI.
-            'as_string'  => $secret->toString(), // As a string
-        ];
+         return response()->json([
+            'status' => 'success',
+            'data' => [
+                'as_qr_code' => $secret->toQr(),     // As QR Code
+                'as_uri'     => $secret->toUri(),    // As "otpauth://" URI.
+                'as_string'  => $secret->toString(), // As a string
+            ]
+        ]); 
     }
 
     public function confirmTwoFactor(Request $request)
     {
         // TODO input validation
         $activated = $request->user()->confirmTwoFactorAuth(
-            $request->input('2fa_code')
+            $request->input('passcode')
         );
         if($activated){
             return response()->json([
@@ -73,7 +79,21 @@ class UserController extends Controller
 
     public function updateUserProfile(Request $request) 
     {
-        # code...
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users,email,'.Auth::user()->id,
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => new UserResource($user)
+        ]);
     }
 
     public function updateUserPassword(Request $request) 

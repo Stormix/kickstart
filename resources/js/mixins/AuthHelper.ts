@@ -6,8 +6,14 @@ const user = namespace('user')
 
 @Component
 class AuthHelper extends Vue {
-  @user.State
+  @user.State((s) => s.current)
   public current!: UserModel | null
+
+  @user.State((s) => s.QR)
+  public QR!: { [key: string]: string } | null
+
+  @user.State((s) => s.recoveryCodes)
+  public recoveryCodes!: { code: string; used_at: string }[] | null
 
   get isLoggedIn(): boolean {
     return !!this.current || false

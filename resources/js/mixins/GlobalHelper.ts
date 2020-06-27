@@ -32,11 +32,12 @@ class GlobalHelper extends Vue {
       return `Something went wrong`
     }
     if (error && error.response && error.response.status <= 422) {
+      console.log(error.response)
       return `${error.response.data.message || 'Not provided'}`
     } else {
-      return `Something went wrong. Error: ${
-        error.response?.data.error || 'Not provided'
-      }`
+      return `Something went wrong. Error: <b> ${
+        error.response?.data.data || 'Not provided'
+      } </b>`
     }
   }
 }

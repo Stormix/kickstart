@@ -124,7 +124,7 @@ router.beforeEach(async (to, from, next) => {
     const hasPermission = await store.dispatch('user/getCurrentUser')
     if (hasPermission) {
       next({
-        path: '/home',
+        path: '/app',
       })
     } else {
       next()

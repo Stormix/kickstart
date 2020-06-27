@@ -6,15 +6,17 @@ import Alert from '@/components/Alert.vue'
   components: { Alert },
 })
 export default class Login extends Mixins(GlobalHelper) {
-  private email = ''
-  private password = ''
-  private remember = false
-  private startValidation = false
-  private verify = false
-  private redirectTo = '/app' //TODO: make this an env variable
-  private error = false
-  private errors: { [key: string]: string } = {}
-  private message: string | null = null
+  public email = 'madadj4@gmail.com'
+  public password = 'madadj4@gmail.com'
+  public remember = false
+  public passcode: string | boolean | null = null
+  public startValidation = false
+  public verify = false
+  public redirectTo = '/app' //TODO: make this an env variable
+  public error = false
+  public errors: { [key: string]: string } = {}
+  public message: string | null = null
+
   get validEmail(): boolean {
     // eslint-disable-next-line no-useless-escape
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -23,12 +25,15 @@ export default class Login extends Mixins(GlobalHelper) {
       (this.email.length > 0 && re.test(String(this.email).toLowerCase()))
     )
   }
+
   get validPassword(): boolean {
     return !this.startValidation || this.password.length > 0
   }
+
   get isValid(): boolean {
     return this.validEmail && this.validPassword
   }
+
   created(): void {
     if (
       'id' in this.$route.query &&
@@ -44,6 +49,7 @@ export default class Login extends Mixins(GlobalHelper) {
       this.redirectTo = this.$route.query.redirectFrom.toString() || '/app'
     }
   }
+
   login(): void {
     this.error = false
     this.startValidation = true
@@ -51,6 +57,7 @@ export default class Login extends Mixins(GlobalHelper) {
       email: this.email,
       password: this.password,
       remember: this.remember,
+      passcode: this.passcode,
     }
     this.$store
       .dispatch('user/loginUser', data)
@@ -62,9 +69,28 @@ export default class Login extends Mixins(GlobalHelper) {
         }
       })
       .catch((error) => {
-        this.error = true
-        this.message = this.handleError(error)
-        this.errors = error.response?.data.errors
+        if (error.response.status == 403) {
+          this.$swal({
+            icon: 'warning',
+            title: 'Two-Factor Authentication',
+            showCancelButton: true,
+            confirmButtonText: 'Verify!',
+            html:
+              'Enter the code given by your Authenticator App: <br><input id="2fa" class="block w-24 px-3 py-2 mx-auto mt-2 text-center placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" maxlength="6" />',
+            buttonsStyling: false,
+          }).then((result: { [key: string]: string | boolean | null }) => {
+             if (result.isConfirmed) {
+              this.passcode = (<HTMLInputElement>document.getElementById('2fa')).value
+              this.login()
+             }
+          })
+          return
+        } else {
+          this.error = true
+          this.message = this.handleError(error)
+          this.errors = error.response?.data.errors
+          this.passcode = null
+        }
       })
   }
 }

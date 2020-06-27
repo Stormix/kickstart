@@ -5,4 +5,5 @@ export interface UserModel {
   remember?: boolean
   password?: string
   '2fa'?: boolean
+  passcode?: string
 }

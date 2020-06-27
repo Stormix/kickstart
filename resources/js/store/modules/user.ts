@@ -5,6 +5,9 @@ import { UserModel } from '@/types/store'
 @Module({ namespaced: true })
 class User extends VuexModule {
   public current: UserModel | null = null
+  public QR: { [key: string]: string } | null = null
+  public recoveryCodes: { code: string; used_at: string }[] | null = null
+
   @Mutation
   public setCurrentUser(user: UserModel): void {
     this.current = user
@@ -25,19 +28,26 @@ class User extends VuexModule {
   }
   @Action({ rawError: true })
   public async loginUser(user: UserModel): Promise<void> {
-    const { remember, email, password } = user
-    await axios.get('/sanctum/csrf-cookie')
-    return axios
-      .post('/login', {
-        email,
-        password,
-        remember, // Not used for now
-      })
-      .then(({ status }) => {
-        if (status == 204) {
-          this.context.dispatch('getCurrentUser')
+    const { remember, email, password, passcode } = user
+    const payload = !passcode
+      ? {
+          email,
+          password,
+          remember, // Not used for now
         }
-      })
+      : {
+          email,
+          password,
+          remember, // Not used for now
+          passcode,
+        }
+
+    await axios.get('/sanctum/csrf-cookie')
+    return axios.post('/login', payload).then(({ status }) => {
+      if (status == 204) {
+        this.context.dispatch('getCurrentUser')
+      }
+    })
   }
   @Action({ rawError: true })
   public async getCurrentUser(): Promise<boolean> {
@@ -58,6 +68,48 @@ class User extends VuexModule {
     return axios
       .post('/logout')
       .then(() => this.context.commit('unsetCurrentUser'))
+  }
+  @Action({ rawError: true })
+  updateUserProfile({ name, email }: { [key: string]: string }): Promise<void> {
+    return axios.put('/api/user/info', {
+      name,
+      email,
+    })
+  }
+  @Action({ rawError: true })
+  prepareTwoFactor(): Promise<void> {
+    return axios
+      .post('/api/user/2fa/prepare')
+      .then(({ data }) => this.context.commit('setQR', data.data))
+  }
+  @Action({ rawError: true })
+  confirmTwoFactor(passcode: string): Promise<void> {
+    return axios
+      .post('/api/user/2fa/confirm', {
+        passcode,
+      })
+      .then(({ data }) => this.context.commit('setRecoveryCodes', data.data))
+      .then(() => this.context.dispatch('getCurrentUser'))
+  }
+
+  @Action({ rawError: true })
+  disableTwoFactorAuth(): Promise<void> {
+    return axios
+      .post('/api/user/2fa/disable')
+      .then(() => this.context.dispatch('getCurrentUser'))
+  }
+  @Mutation
+  update(user: UserModel): void {
+    this.current = user
+  }
+  @Mutation
+  setQR(QR: { [key: string]: string }): void {
+    this.QR = QR
+  }
+
+  @Mutation
+  setRecoveryCodes(codes: { code: string; used_at: string }[]): void {
+    this.recoveryCodes = codes
   }
 }
 export default User
