@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
+use App\User;
 use Auth;
 
 class UserController extends Controller
@@ -27,7 +30,7 @@ class UserController extends Controller
                 'as_uri'     => $secret->toUri(),    // As "otpauth://" URI.
                 'as_string'  => $secret->toString(), // As a string
             ]
-        ]); 
+        ]);
     }
 
     public function confirmTwoFactor(Request $request)
@@ -77,7 +80,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateUserProfile(Request $request) 
+    public function updateUserProfile(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -96,8 +99,18 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateUserPassword(Request $request) 
+    public function updateUserPassword(Request $request)
     {
-        # code...
+        $request->validate([
+            'password_current' => ['required', new MatchOldPassword],
+            'password' => ['required'],
+            'password_confirm' => ['same:password'],
+        ]);
+
+        User::find(auth()->id())->update(['password'=> Hash::make($request->password)]);
+
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 }

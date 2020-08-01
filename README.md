@@ -1,4 +1,4 @@
-# (WIP) Kickstart - A Laravel Boilerplate for personal/client projects
+# (WIP) Kickstart - A SaaS Laravel Boilerplate
 
 ![CI / CD](https://github.com/Stormix/kickstart/workflows/CI%20/%20CD/badge.svg)
 

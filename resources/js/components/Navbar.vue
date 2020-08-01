@@ -96,7 +96,7 @@ export default class Navbar extends Vue {
                 tag="div"
                 :to="item.path"
                 :class="{ 'ml-5': index > 0 }"
-                class="relative z-10 flex px-3 py-2 ml-4 leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-white hover:text-gray-900 hover:border-indigo-600"
+                class="relative z-10 flex px-3 py-2 ml-4 leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-white cursor-pointer hover:text-gray-900 hover:border-indigo-600"
                 exact-active-class="px-3 py-2 font-bold leading-5 text-gray-900 transition duration-150 ease-in-out border-indigo-600"
               >
                 <div class="block my-auto">
@@ -155,14 +155,12 @@ export default class Navbar extends Vue {
                   aria-orientation="vertical"
                   aria-labelledby="user-menu"
                 >
-                  <router-link
-                    tag="a"
+                  <a
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                    to="/app/settings"
-                    active-class="text-white bg-blue-700"
+                    @click="$router.push('/app/settings')"
                   >
                     Settings
-                  </router-link>
+                  </a>
                   <a
                     href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"

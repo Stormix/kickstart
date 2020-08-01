@@ -29,5 +29,10 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/ui'), require('@tailwindcss/custom-forms')],
+  plugins: [
+    require('@tailwindcss/ui'),
+    require('@tailwindcss/custom-forms'),
+    require('@tailwindcss/typography'),
+    require('tailwindcss-plugin-delight'),
+  ],
 }

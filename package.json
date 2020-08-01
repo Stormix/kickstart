@@ -43,12 +43,14 @@
         "vuex-module-decorators": "^0.17.0"
     },
     "dependencies": {
+        "@tailwindcss/typography": "^0.2.0",
         "@tailwindcss/ui": "^0.3.0",
         "axios-auth-refresh": "^2.2.6",
         "laravel-vue-lang": "^3.0.0-alpha",
         "postcss-import": "^12.0.1",
         "stylelint-config-recommended": "^3.0.0",
         "tailwindcss": "^1.4.6",
+        "tailwindcss-plugin-delight": "^0.2.1",
         "vue-class-component": "^7.2.3",
         "vue-closable": "^0.0.3",
         "vue-gravatar": "^1.3.1",

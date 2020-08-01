@@ -13,7 +13,7 @@ import Card from '@/components/Card'
   },
 })
 export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
-  public menu: { [key: string]: string | boolean }[] = [
+  menu: { [key: string]: string | boolean }[] = [
     {
       title: 'Profile',
     },
@@ -24,29 +24,25 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
       title: 'Two-Factor Authentication',
     },
   ]
-  public selected = 'Profile'
-  public name: string | null | undefined = null
-  public email: string | null | undefined = null
-  public password_current: string | null | undefined = null
-  public password: string | null | undefined = null
-  public password_confirm: string | null | undefined = null
-  public showQR = false
-  public QRurl = ''
-  public passcode = ''
+  selected = 'Profile'
+  name: string | null = null
+  email: string | null = null
+  password: string | null = null
+  password_confirm: string | null = null
+  password_current: string | null = null
+  showQR = false
+  QRurl = ''
+  passcode = ''
+  loading = false
 
   get user(): UserModel | null {
     return this.current
   }
 
   @Watch('user', { immediate: true, deep: true })
-  onPropertyChanged(value: { [key: string]: string | null | undefined }): void {
-    if (!value) {
-      return
-    }
+  onPropertyChanged(value: { [key: string]: string | null }): void {
     this.name = value.name
     this.email = value.email
-    this.password = value.password
-    this.password_confirm = value.password_confirm
   }
 
   selectTab(item: { [key: string]: string }): void {
@@ -79,7 +75,31 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
   }
 
   updatePassword(): void {
-    console.log(this.password, this.password_confirm, this.password_current)
+    this.loading = true
+    this.$store
+      .dispatch('user/updateUserPassword', {
+        password: this.password,
+        password_current: this.password_current,
+        password_confirm: this.password_confirm,
+      })
+      .then((response) => {
+        this.loading = false
+        if (response.status == 200) {
+          this.$swal({
+            icon: 'success',
+            title: 'Saved !',
+            text: 'Your profile has been updated.',
+          })
+        }
+      })
+      .catch((error) => {
+        this.loading = false
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: this.handleError(error),
+        })
+      })
   }
 
   enable2FA(): void {
@@ -122,7 +142,7 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
         this.$swal({
           title: 'Two-Factor authentication enabled!',
           icon: 'success',
-          html: `Here are your recovery codes, make sure you copy 
+          html: `Here are your recovery codes, make sure you copy
           them somewhere safe. <ul>${codes.join(' ')}</ul>`,
         })
       })
@@ -289,9 +309,10 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
             <div class="flex-1" />
             <button
               type="submit"
-              class="justify-center float-right px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+              class="flex items-center float-right px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
               @click="updatePassword"
             >
+              <div v-if="loading" class="mr-2 text-white spin-donut" />
               Save Changes
             </button>
           </template>
@@ -345,7 +366,7 @@ export default class Settings extends Mixins(GlobalHelper, AuthHelper) {
               </div>
 
               <div v-else class="">
-                Ay lmao
+                Click the button to disable 2FA.
               </div>
             </div>
           </template>

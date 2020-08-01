@@ -58,7 +58,7 @@ class User extends VuexModule {
       .catch(() => false)
   }
   @Action({ rawError: true })
-  public async forgotPassword(email: string): Promise<void> {
+  public async forgotPassword(email: string): Promise<AxiosResponse> {
     return axios.post('/password/email', {
       email,
     })
@@ -74,6 +74,20 @@ class User extends VuexModule {
     return axios.put('/api/user/info', {
       name,
       email,
+    })
+  }
+  @Action({ rawError: true })
+  updateUserPassword({
+    password,
+    password_current,
+    password_confirm,
+  }: {
+    [key: string]: string
+  }): Promise<void> {
+    return axios.put('/api/user/password', {
+      password,
+      password_current,
+      password_confirm,
     })
   }
   @Action({ rawError: true })

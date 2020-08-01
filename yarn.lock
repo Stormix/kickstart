@@ -834,6 +834,11 @@
     mini-svg-data-uri "^1.0.3"
     traverse "^0.6.6"
 
+"@tailwindcss/typography@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.2.0.tgz#b597c83502e3c3c6641a8aaabda223cd494ab349"
+  integrity sha512-aPgMH+CjQiScLZculoDNOQUrrK2ktkbl3D6uCLYp1jgYRlNDrMONu9nMu8LfwAeetYNpVNeIGx7WzHSu0kvECg==
+
 "@tailwindcss/ui@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/ui/-/ui-0.3.0.tgz#846e489c61bdeb60bdd4e2c32033db770ad8d429"
@@ -8600,6 +8605,19 @@ table@^5.2.3:
     lodash "^4.17.14"
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
+
+tailwindcss-plugin-delight@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tailwindcss-plugin-delight/-/tailwindcss-plugin-delight-0.2.1.tgz#0b98017a98313c71fa77346ba5d6b2cf3a120a0f"
+  integrity sha512-0GoFXAC5o1YIt6oQRvBhiGR/54fN+t7tYoOF5nh52vP7hoCkGLI02lqSHcxVa0A6kLR3JDkXx58+4lfT40GbJQ==
+  dependencies:
+    tailwindcss "^1.4.6"
+    tailwindcss-plugin-fancy "^1.2.22"
+
+tailwindcss-plugin-fancy@^1.2.22:
+  version "1.2.24"
+  resolved "https://registry.yarnpkg.com/tailwindcss-plugin-fancy/-/tailwindcss-plugin-fancy-1.2.24.tgz#a0afcdda138ec156581bc8b9a97e53368015da5c"
+  integrity sha512-As8cwUKCz+tbNu3jvoyktJDcW0nlvc+q3vWhSqpz4+ru6yXkCiMAodF8ic9F/iobAbz3LUdnhRST3hBAAX58bw==
 
 tailwindcss@^1.4.6:
   version "1.4.6"
