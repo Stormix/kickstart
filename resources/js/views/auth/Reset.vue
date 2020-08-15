@@ -8,14 +8,21 @@ import Alert from '@/components/Alert.vue'
   },
 })
 export default class Reset extends Mixins(GlobalHelper) {
-  private password = ''
-  private email = ''
-  private password_confirmation = ''
-  private startValidation = false
-  private success = false
-  private error = false
-  private errors: { [key: string]: string } = {}
-  private message: string | null = null
+  password = ''
+  email = ''
+  password_confirmation = ''
+  startValidation = false
+  success = false
+  error = false
+  errors: { [key: string]: string } = {}
+  message: string | null = null
+
+  mounted(): void {
+    if (this.$route.query.email) {
+      this.email = (this.$route.query?.email as string) || ''
+    }
+  }
+
   get validEmail(): boolean {
     // eslint-disable-next-line no-useless-escape
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -23,6 +30,9 @@ export default class Reset extends Mixins(GlobalHelper) {
       !this.startValidation ||
       (this.email.length > 0 && re.test(String(this.email).toLowerCase()))
     )
+  }
+  get token(): string {
+    return this.$route.params.token || 'unset'
   }
   get validPassword(): boolean {
     return (
@@ -39,14 +49,20 @@ export default class Reset extends Mixins(GlobalHelper) {
     this.errors = {}
     this.startValidation = true
     this.$store
-      .dispatch('user/forgotPassword', this.email)
+      .dispatch('user/resetPassword', {
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+        token: this.token,
+      })
       .then((response) => {
-        console.log(response)
         if (response.status == 200) {
           this.success = true
-          this.message =
-            'Email sent! Check your inbox for further instructions.'
+          this.message = `Your password has been reset! You'll be redirected shortly.`
         }
+        setTimeout(() => {
+          this.$router.push('/app')
+        }, 1000)
       })
       .catch((error) => {
         this.error = true
@@ -159,7 +175,7 @@ export default class Reset extends Mixins(GlobalHelper) {
               :disabled="!isValid"
               @click.prevent="reset"
             >
-              Send password reset link
+              Update Password
             </button>
           </span>
         </div>

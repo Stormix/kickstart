@@ -17,5 +17,8 @@
         }, 
         "vetur.validation.script": false,
         "vetur.validation.template": false,
+        "conventionalCommits.scopes": [
+          "password-reset"
+        ],
     }
 }

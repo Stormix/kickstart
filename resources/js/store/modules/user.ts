@@ -64,6 +64,22 @@ class User extends VuexModule {
     })
   }
   @Action({ rawError: true })
+  public async resetPassword({
+    token,
+    email,
+    password,
+    password_confirmation,
+  }: {
+    [key: string]: string
+  }): Promise<AxiosResponse> {
+    return axios.post('/password/reset', {
+      token,
+      email,
+      password,
+      password_confirmation,
+    })
+  }
+  @Action({ rawError: true })
   logout(): Promise<void> {
     return axios
       .post('/logout')

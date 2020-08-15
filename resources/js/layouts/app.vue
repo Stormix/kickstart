@@ -17,7 +17,7 @@ export default class AppLayout extends Mixins(GlobalHelper, AuthHelper) {}
 </script>
 <template>
   <div class="flex flex-col h-full bg-gray-50">
-    <Navbar :user="current" @logout="logout" />
+    <Navbar v-if="current" :user="current" @logout="logout" />
     <header>
       <div class="container px-4 py-6 mx-auto sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
