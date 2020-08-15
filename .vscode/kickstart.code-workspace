@@ -20,5 +20,6 @@
         "conventionalCommits.scopes": [
           "password-reset"
         ],
+        "discord.enabled": true,
     }
 }

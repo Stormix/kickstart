@@ -10,10 +10,8 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class Footer extends Vue {}
 </script>
 <template>
-  <footer class="w-full text-gray-700 body-font">
-    <div
-      class="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row"
-    >
+  <footer class="w-full text-gray-700 bg-white body-font">
+    <div class="flex flex-col items-center px-5 py-4 sm:flex-row">
       <a
         class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start"
       >

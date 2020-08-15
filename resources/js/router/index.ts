@@ -9,6 +9,7 @@ import Register from '@/views/auth/Register.vue'
 import Reset from '@/views/auth/Reset.vue'
 import Forgot from '@/views/auth/Forgot.vue'
 import Settings from '@/views/Settings.vue'
+import Users from '@/views/admin/Users.vue'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -32,10 +33,20 @@ const router = new VueRouter({
       children: [
         {
           path: '/',
-          name: 'home',
+          name: 'dashboard',
           component: Home,
           meta: {
-            title: 'Home',
+            title: 'Dashboard',
+            requiresAuth: true,
+            redirectsIfAuth: false,
+          },
+        },
+        {
+          path: 'users',
+          name: 'users',
+          component: Users,
+          meta: {
+            title: 'Users',
             requiresAuth: true,
             redirectsIfAuth: false,
           },

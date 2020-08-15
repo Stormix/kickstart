@@ -37,8 +37,8 @@ export default class Navbar extends Vue {
 
 <template>
   <nav class="bg-white border-b border-gray-200">
-    <div class="container px-2 mx-auto sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
+    <div class="px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-20">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button
@@ -86,24 +86,7 @@ export default class Navbar extends Vue {
           class="flex items-center justify-center flex-1 h-full sm:justify-start"
         >
           <div class="items-center justify-center flex-shrink-0">
-            <Logo class="block w-auto h-8 my-auto" />
-          </div>
-          <div class="hidden h-full sm:block sm:ml-6">
-            <div class="flex h-full">
-              <router-link
-                v-for="(item, index) in menuItems"
-                :key="item.path"
-                tag="div"
-                :to="item.path"
-                :class="{ 'ml-5': index > 0 }"
-                class="relative z-10 flex px-3 py-2 ml-4 leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-white cursor-pointer hover:text-gray-900 hover:border-indigo-600"
-                exact-active-class="px-3 py-2 font-bold leading-5 text-gray-900 transition duration-150 ease-in-out border-indigo-600"
-              >
-                <div class="block my-auto">
-                  {{ item.name }}
-                </div>
-              </router-link>
-            </div>
+            <Logo class="block w-auto h-8 my-auto lg:hidden" />
           </div>
         </div>
         <div
@@ -115,12 +98,15 @@ export default class Navbar extends Vue {
               <button
                 id="user-menu"
                 ref="profileToggle"
-                class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-white"
+                class="flex items-center px-2 py-2 text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus:border-white"
                 aria-label="User menu"
                 aria-haspopup="true"
                 @click="dropdown = !dropdown"
               >
-                <v-gravatar :email="user.email" class="w-8 h-8 rounded-full" />
+                <div class="mr-4 text-lg text-gray-500">
+                  Hi, <span class="font-bold text-gray-700">Anas</span>
+                </div>
+                <v-gravatar :email="user.email" class="w-10 h-10 rounded-md" />
               </button>
             </div>
             <!--

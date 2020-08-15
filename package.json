@@ -43,6 +43,8 @@
         "vuex-module-decorators": "^0.17.0"
     },
     "dependencies": {
+        "@iconscout/vue-unicons": "^0.0.2",
+        "@iconscout/vue-unicons-solid": "^0.0.2",
         "@tailwindcss/typography": "^0.2.0",
         "@tailwindcss/ui": "^0.3.0",
         "axios-auth-refresh": "^2.2.6",

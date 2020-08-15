@@ -805,6 +805,16 @@
     postcss "7.0.28"
     purgecss "^2.2.0"
 
+"@iconscout/vue-unicons-solid@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@iconscout/vue-unicons-solid/-/vue-unicons-solid-0.0.2.tgz#a92efcf2229264f67784854761df41fc2a5ac827"
+  integrity sha512-sraNAlOt7isPs1K7CK/7TAmr2NTbJ1QQpUt2PfA7WygTCa4Ujl+PSlKg8hXZ83R+GDkrL0pXhqU64o4s8rqbzg==
+
+"@iconscout/vue-unicons@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@iconscout/vue-unicons/-/vue-unicons-0.0.2.tgz#d08fa419397b40dfb4c0f985352a8ff43bf66bf8"
+  integrity sha512-pV0PESMekGvVrAm3K1YtyT5eX8hpK1vutRiQYu58y3kuVnEdcS5Mxm3kyelcuwwlMUXAIBDPNbaG/4a0Yg22qg==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
