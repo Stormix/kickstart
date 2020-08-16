@@ -23,6 +23,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::put('/user/info', 'API\UserController@updateUserProfile');
     Route::put('/user/password', 'API\UserController@updateUserPassword');
+
+    // Admin routes
+    Route::group(['prefix' => 'admin',  'middleware' => 'role:admin'], function () {
+        Route::get('users', 'API\Admin\UserController@getAll');
+    });
 });
 
 // Broadcast::routes(['middleware' => ['auth:sanctum']]);

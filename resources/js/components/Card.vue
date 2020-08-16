@@ -8,7 +8,7 @@ export default class Card extends Vue {}
   <div
     class="flex flex-col w-full h-full px-8 py-4 bg-white rounded-lg shadow-md"
   >
-    <div class="flex items-center justify-between pb-4 mb-4 border-b">
+    <div class="flex items-center justify-between pb-4 mb-4">
       <slot name="header" />
     </div>
     <div class="flex flex-1">

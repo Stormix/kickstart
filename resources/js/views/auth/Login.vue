@@ -2,6 +2,8 @@
 import { Component, Mixins } from 'vue-property-decorator'
 import GlobalHelper from '@/mixins/GlobalHelper'
 import Alert from '@/components/Alert.vue'
+import {SweetAlertResult} from 'sweetalert2';
+
 @Component({
   components: { Alert },
 })
@@ -61,7 +63,17 @@ export default class Login extends Mixins(GlobalHelper) {
     }
     this.$store
       .dispatch('user/loginUser', data)
-      .then(() => {
+      .then((loggedIn) => {
+        if (!loggedIn) {
+          this.$swal({
+            icon: 'warning',
+            title: 'Verify Email!',
+            text:
+              'Please check your email for instruction on how verify your account!',
+            buttonsStyling: false,
+          })
+          return
+        }
         if (this.verify) {
           window.location.href = this.redirectTo
         } else {
@@ -78,11 +90,14 @@ export default class Login extends Mixins(GlobalHelper) {
             html:
               'Enter the code given by your Authenticator App: <br><input id="2fa" class="block w-24 px-3 py-2 mx-auto mt-2 text-center placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" maxlength="6" />',
             buttonsStyling: false,
-          }).then((result: { [key: string]: string | boolean | null }) => {
-             if (result.isConfirmed) {
-              this.passcode = (<HTMLInputElement>document.getElementById('2fa')).value
+          })
+          .then((value) => {
+            if (value.isConfirmed) {
+              this.passcode = (document.getElementById(
+                '2fa'
+              ) as HTMLInputElement).value
               this.login()
-             }
+            }
           })
           return
         } else {

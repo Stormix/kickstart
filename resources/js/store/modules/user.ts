@@ -27,7 +27,7 @@ class User extends VuexModule {
     })
   }
   @Action({ rawError: true })
-  public async loginUser(user: UserModel): Promise<void> {
+  public async loginUser(user: UserModel): Promise<boolean | void> {
     const { remember, email, password, passcode } = user
     const payload = !passcode
       ? {
@@ -44,8 +44,8 @@ class User extends VuexModule {
 
     await axios.get('/sanctum/csrf-cookie')
     return axios.post('/login', payload).then(({ status }) => {
-      if (status == 204) {
-        this.context.dispatch('getCurrentUser')
+      if (status == 204 || status == 200) {
+        return this.context.dispatch('getCurrentUser')
       }
     })
   }

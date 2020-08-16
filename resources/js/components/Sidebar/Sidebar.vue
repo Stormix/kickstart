@@ -71,27 +71,16 @@ export default class Sidebar extends Vue {
         <UilAngleDoubleLeft
           v-show="isOpen"
           size="32px"
-          class="relative z-0 mt-1"
+          class="relative z-0 mt-1 cursor-pointer"
         />
         <UilAngleDoubleRight
           v-show="hover && !isOpen"
           size="32px"
-          class="relative z-0 mt-1"
+          class="relative z-0 mt-1 cursor-pointer"
         />
       </div>
     </div>
-    <div v-show="!showFullSidebar" class="px-4" @click="toggle">
-      <UilAngleDoubleRight
-        size="32px"
-        class="mt-4 text-indigo-500 cursor-pointer"
-      />
-    </div>
-    <div
-      class="flex flex-col flex-1 w-full"
-      :class="{
-        'mt-10': showFullSidebar,
-      }"
-    >
+    <div class="flex flex-col flex-1 w-full mt-8">
       <MenuItem
         :item="{ name: 'Dashboard', route: '/app' }"
         :expand="showFullSidebar"

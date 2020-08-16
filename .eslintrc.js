@@ -14,7 +14,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': [
-      'error',
+      1,
       {
         endOfLine: 'auto',
       },
@@ -30,7 +30,7 @@ module.exports = {
       },
     ],
     'vue/html-self-closing': [
-      'error',
+      2,
       {
         html: {
           void: 'always',
@@ -41,7 +41,6 @@ module.exports = {
         math: 'always',
       },
     ],
-    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    '@typescript-eslint/no-explicit-any': 0,
   },
 }

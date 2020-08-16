@@ -14,7 +14,8 @@ import VueClosable from 'vue-closable'
 import Gravatar from 'vue-gravatar'
 import Lang from 'laravel-vue-lang'
 import VueSweetalert2 from 'vue-sweetalert2'
-
+import VueTailwind from 'vue-tailwind'
+import theme from '@/themes/default'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 /**
@@ -36,6 +37,8 @@ Vue.use(Lang, {
   fallback: 'en',
 })
 Vue.use(VueSweetalert2)
+Vue.use(VueTailwind, theme)
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

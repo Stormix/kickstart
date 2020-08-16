@@ -1,14 +1,53 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+import { UserModel } from '@/types/store'
 import GlobalHelper from '@/mixins/GlobalHelper'
 import SubHeader from '@/components/SubHeader'
+import Card from '@/components/Card'
+import { UilUserPlus } from '@iconscout/vue-unicons'
+import { UilExport } from '@iconscout/vue-unicons'
+import Table from '@/components/Datatables/Table'
+import moment from 'moment'
+
+const users = namespace('adminUsers')
 @Component({
   components: {
     SubHeader,
+    Card,
+    UilUserPlus,
+    UilExport,
+    Table,
   },
 })
 export default class Home extends Mixins(GlobalHelper) {
-  //
+  @users.State((s) => s.all)
+  public users!: UserModel[] | null
+
+  columns = [
+    { title: 'User ID', field: 'id', sortable: true, primary: true },
+    { title: 'Username', field: 'name' },
+    { title: 'Email', field: 'email', sortable: true },
+    {
+      title: 'Role',
+      field: 'roles',
+      isArray: true,
+      arrayKey: 'name',
+    },
+    {
+      title: 'Created At',
+      field: 'created_at',
+      format: (v: string): string => moment(v).format('MMM Do YY'),
+    },
+  ]
+
+  query = { limit: 10, offset: 0, sort: 'id', order: true }
+  data = []
+  total = 0
+
+  async created(): Promise<void> {
+    await this.$store.dispatch('adminUsers/getAll')
+  }
 }
 </script>
 <template>
@@ -17,12 +56,37 @@ export default class Home extends Mixins(GlobalHelper) {
       <div class="px-4 text-2xl font-medium text-gray-900 border-r-2">
         {{ pageTitle }}
       </div>
-      <div class="ml-4 font-medium text-gray-500">
-        450 total
-      </div>
+      <div class="ml-4 font-medium text-gray-500">{{ users.length }} total</div>
     </SubHeader>
-    <!-- Replace with your content -->
-    <div class="container px-4" />
-    <!-- /End replace -->
+    <div class="w-full h-full panel">
+      <Card class="w-full">
+        <template #header>
+          <div>
+            <div class="text-xl font-medium text-gray-900">
+              User Management
+            </div>
+            <div class="">
+              This is a subtitle
+            </div>
+          </div>
+          <div class="flex items-center">
+            <t-button>
+              <UilUserPlus size="24px" class="mr-2" /> New User
+            </t-button>
+            <t-button variant="secondary">
+              <UilExport size="24px" class="mr-2" /> Export
+            </t-button>
+          </div>
+        </template>
+        <template #content>
+          <Table
+            :query="query"
+            :data="users"
+            :columns="columns"
+            data-key="id"
+          />
+        </template>
+      </Card>
+    </div>
   </div>
 </template>

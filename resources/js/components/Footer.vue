@@ -35,11 +35,11 @@ export default class Footer extends Vue {}
       <span
         class="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start"
       >
-        <a class="text-gray-500">
-          <i class="fab fa-facebook-f" />
-        </a>
-        <a class="ml-3 text-gray-500">
-          <i class="fab fa-twitter" />
+        <a
+          href="https://github.com/stormix/kickstart"
+          class="ml-3 text-gray-500"
+        >
+          <i class="fab fa-github" /> View on Github
         </a>
       </span>
     </div>

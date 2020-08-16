@@ -11,7 +11,7 @@ export default class Welcome extends Mixins(GlobalHelper, AuthHelper) {
 }
 </script>
 <template>
-  <div class="w-full h-full flex-center position-ref">
+  <div class="w-full h-full min-h-screen my-auto flex-center position-ref">
     <div class="top-right links">
       <router-link v-if="!isLoggedIn" tag="a" to="/auth/login">
         Login

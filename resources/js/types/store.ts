@@ -1,3 +1,7 @@
+export interface RoleModel {
+  name: string
+}
+
 export interface UserModel {
   id?: number
   name: string
@@ -6,4 +10,5 @@ export interface UserModel {
   password?: string
   '2fa'?: boolean
   passcode?: string
+  roles?: RoleModel[]
 }

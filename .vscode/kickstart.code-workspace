@@ -7,19 +7,22 @@
         "scss.validate": false,
         "stylelint.enable": true,
         "editor.formatOnSave": false,
+        "javascript.validate.enable": false,
         "editor.codeActionsOnSave": {
             "source.fixAll.eslint": true
         },
         "javascript.format.enable": false,
         "eslint.alwaysShowStatus": true,
         "eslint.options": {
-          "extensions": [ ".html", ".js", ".vue", ".jsx" ]
-        }, 
+          "extensions": [ ".html", ".js", ".ts", ".vue", ".jsx" ]
+        },
         "vetur.validation.script": false,
         "vetur.validation.template": false,
         "conventionalCommits.scopes": [
-          "password-reset"
+          "password-reset",
+          "admin-UI"
         ],
         "discord.enabled": true,
+        "typescript.tsdk": "node_modules\\typescript\\lib"
     }
 }
