@@ -22,7 +22,7 @@ export default class Footer extends Vue {}
       <p
         class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0"
       >
-        © 2020 Kickstart —
+        By
         <a
           href="https://stormix.co"
           class="ml-1 text-gray-600"

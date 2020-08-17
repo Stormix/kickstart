@@ -55,6 +55,3 @@ jobs:
           docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ secrets.IMAGE_NAME }}:${{ secrets.TAG }} .
           echo ${{ secrets.DOCKER_PWD  }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
           docker push ${{ secrets.DOCKER_LOGIN }}/${{ secrets.IMAGE_NAME }}:${{ secrets.TAG }}
-
-      - name: Deploy app to Server via Docker
-        run: echo 'LOL'

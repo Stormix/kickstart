@@ -3,15 +3,34 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import { UilAngleDown } from '@iconscout/vue-unicons'
 import { UilAngleUp } from '@iconscout/vue-unicons'
 
+import TablePagination from '@/components/Datatables/TablePagination'
+export type Action = {
+  icon: {
+    is: string
+    size?: number
+    [key: string]: any
+  }
+  text: string
+  component: {
+    is: string
+    [key: string]: any
+  }
+  handler: (item: any) => void
+}
+
 export type Column = {
   title: string
-  field: string
+  field?: string
   sortable?: boolean
   primary?: boolean
-  isArray?: boolean
-  arrayKey?: string
-  format?: (value: string) => string
+  array?: boolean
+  arrayItemValue?: (value: any) => string
+  arrayComponentProps?: (value: any) => string
+  format?: (value: string, item?: any) => string
+  actions?: boolean
+  actionButtons?: Action[]
 }
+
 export type Query = {
   limit: number
   offset: number
@@ -23,6 +42,7 @@ export type Query = {
   components: {
     UilAngleDown,
     UilAngleUp,
+    TablePagination,
   },
 })
 export default class Table extends Vue {
@@ -33,8 +53,24 @@ export default class Table extends Vue {
   @Prop({ required: true }) dataKey!: string
 
   sortBy!: string
+
+  resultsPerPage = 10
+  currentPage = 1
+
+  get totalResults(): number {
+    return this.data?.length || 0
+  }
+  get totalPages(): number {
+    return Math.ceil(this.totalResults / this.resultsPerPage) || 0
+  }
+
+  public get range(): string {
+    const start = Math.max((this.currentPage - 1) * this.resultsPerPage, 0)
+    const end = Math.min(start + this.resultsPerPage, this.totalResults)
+    return `${start + 1}-${end}`
+  }
+
   get sortFn(): (a: any, b: any) => number {
-    console.log(this.query)
     return (a: any, b: any): number => {
       if (a[this.query.sort] > b[this.query.sort]) {
         return this.query.order ? 1 : -1
@@ -47,7 +83,11 @@ export default class Table extends Vue {
   }
   get items(): any {
     const data = [...this.data]
-    return data.sort(this.sortFn)
+
+    const start = Math.max((this.currentPage - 1) * this.resultsPerPage, 0)
+    const end = Math.min(start + this.resultsPerPage, this.totalResults)
+
+    return data.slice(start, end).sort(this.sortFn)
   }
 
   setSort(key: string, order = false): void {
@@ -57,6 +97,10 @@ export default class Table extends Vue {
 
   public getSort(key: string, order = false): boolean {
     return this.query.sort == key && this.query.order == order
+  }
+
+  public goToPage(page: number): void {
+    this.currentPage = page
   }
 }
 </script>
@@ -111,24 +155,60 @@ export default class Table extends Vue {
             :key="`td:${col.field}:${item[dataKey]}`"
             class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
           >
-            <div v-if="col.isArray" class="">
-              <t-tag
+            <div v-if="col.array" class="">
+              <!-- eslint-disable-next-line vue/require-component-is-->
+              <component
                 v-for="subItem in item[col.field]"
-                :key="`td:${col.field}:${item[dataKey]}:${
-                  subItem[col.arrayKey]
-                }`"
-                tag-name="span"
-                variant="badgeSuccess"
+                :key="`td:${col.field}:${item[dataKey]}:${col.arrayItemValue(
+                  subItem
+                )}`"
+                v-bind="col.arrayComponentProps(subItem)"
               >
-                {{ subItem[col.arrayKey] }}
-              </t-tag>
+                {{ col.arrayItemValue(subItem) }}
+              </component>
+            </div>
+            <div v-else-if="col.actions" class="">
+              <!-- eslint-disable-next-line vue/require-component-is-->
+              <component
+                v-for="action in col.actionButtons"
+                :key="`td:action:${action.text}:${item[dataKey]}`"
+                v-bind="action.component"
+                @click="action.handler(item)"
+              >
+                <component
+                  :is="action.icon.is"
+                  v-tippy
+                  :content="action.text"
+                  :size="action.icon.size.toString()"
+                />
+              </component>
             </div>
             <div v-else class="">
-              {{ col.format ? col.format(item[col.field]) : item[col.field] }}
+              {{
+                col.format ? col.format(item[col.field], item) : item[col.field]
+              }}
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+    <div class="flex flex-row items-center justify-between mt-4">
+      <TablePagination
+        :total-pages="totalPages"
+        :total="totalResults"
+        :current-page="currentPage"
+        @page-changed="goToPage"
+      />
+      <div class="flex flex-row items-center">
+        <div class="">
+          <TRichSelect
+            v-model="resultsPerPage"
+            :options="[5, 10, 50, 100]"
+            :hide-search-box="true"
+          />
+        </div>
+        <div class="ml-2">Showing {{ range }} of {{ totalResults }}</div>
+      </div>
+    </div>
   </div>
 </template>

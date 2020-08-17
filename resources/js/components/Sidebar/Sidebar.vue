@@ -24,7 +24,7 @@ import { UilCog } from '@iconscout/vue-unicons'
   },
 })
 export default class Sidebar extends Vue {
-  isOpen = true
+  isOpen!: boolean
   hover = false
 
   @Watch('isOpen')
@@ -35,14 +35,25 @@ export default class Sidebar extends Vue {
 
   public toggle(): void {
     this.isOpen = !this.isOpen
+    this.persist()
   }
 
   get showFullSidebar(): boolean {
     return this.isOpen || this.hover
   }
 
-  mounted(): void {
+  created(): void {
+    let isOpen = true
+    if (localStorage.getItem('sidebar-open')) {
+      isOpen = localStorage.getItem('sidebar-open') === 'open'
+    }
+    this.isOpen = isOpen
+    this.persist()
     this.$emit('toggle', this.isOpen)
+  }
+
+  persist(): void {
+    localStorage.setItem('sidebar-open', this.isOpen ? 'open' : 'close')
   }
 }
 </script>
@@ -110,7 +121,3 @@ export default class Sidebar extends Vue {
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.sidebar {
-}
-</style>

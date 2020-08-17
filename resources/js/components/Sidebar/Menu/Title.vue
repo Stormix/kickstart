@@ -3,7 +3,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class MenuTitle extends Vue {
-  @Prop({ required: false }) expand = true
+  @Prop() expand!: boolean
 }
 </script>
 <template>
