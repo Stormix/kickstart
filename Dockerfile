@@ -71,6 +71,12 @@ RUN composer install \
   --no-scripts \
   --prefer-dist
 
+# Run DB migrations
+RUN php artisan migrate
+
+# Seed DB
+RUN php artisan db:seed
+
 # install all frontend dependencies
 RUN /root/.yarn/bin/yarn
 
