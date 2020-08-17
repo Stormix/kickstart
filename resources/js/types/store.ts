@@ -10,5 +10,6 @@ export interface UserModel {
   password?: string
   '2fa'?: boolean
   passcode?: string
-  roles?: RoleModel[]
+  ros?: RoleModel[]
+  verified_at?: string
 }

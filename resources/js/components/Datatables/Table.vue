@@ -29,6 +29,10 @@ export type Column = {
   format?: (value: string, item?: any) => string
   actions?: boolean
   actionButtons?: Action[]
+  checkbox?: boolean
+  checkboxValue?: (item: any) => boolean
+  checkboxHandler?: (item: any) => void
+  checkboxText?: (item: any) => string
 }
 
 export type Query = {
@@ -111,8 +115,8 @@ export default class Table extends Vue {
       <thead>
         <tr class="items-center">
           <th
-            v-for="col in columns"
-            :key="`th:${col.field}`"
+            v-for="(col, i) in columns"
+            :key="`th:${i}`"
             class="px-6 py-3 font-medium leading-4 tracking-wider text-left text-gray-400 uppercase border-b border-gray-200"
           >
             <div class="flex flex-row items-center">
@@ -151,15 +155,15 @@ export default class Table extends Vue {
       <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="item in items" :key="`row:${item[dataKey]}`">
           <td
-            v-for="col in columns"
-            :key="`td:${col.field}:${item[dataKey]}`"
+            v-for="(col, i) in columns"
+            :key="`td:${i}:${item[dataKey]}`"
             class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
           >
             <div v-if="col.array" class="">
               <!-- eslint-disable-next-line vue/require-component-is-->
               <component
                 v-for="subItem in item[col.field]"
-                :key="`td:${col.field}:${item[dataKey]}:${col.arrayItemValue(
+                :key="`td:array:${item[dataKey]}:${col.arrayItemValue(
                   subItem
                 )}`"
                 v-bind="col.arrayComponentProps(subItem)"
@@ -182,6 +186,16 @@ export default class Table extends Vue {
                   :size="action.icon.size.toString()"
                 />
               </component>
+            </div>
+            <div v-else-if="col.checkbox" class="">
+              <component
+                :is="'TToggle'"
+                :key="`td:checkbox:${item[dataKey]}`"
+                v-tippy
+                :content="col.checkboxText(item)"
+                :checked="col.checkboxValue(item)"
+                @click="col.checkboxHandler(item)"
+              />
             </div>
             <div v-else class="">
               {{

@@ -8978,10 +8978,10 @@ vue-sweetalert2@^3.0.5:
   dependencies:
     sweetalert2 "9.x"
 
-vue-tailwind@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/vue-tailwind/-/vue-tailwind-1.1.1.tgz#c48b6b6310ab71f8bfa0ec468d8e623bb250baa9"
-  integrity sha512-nqu5hxoh+IbaIhv7D6TUGB9isuWt/YddW3fhVm1Uc83YfLyl+icH3fnY3e0A6r9DQqpbwp1j9cnRA0PKo3eoRA==
+vue-tailwind@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/vue-tailwind/-/vue-tailwind-1.1.4.tgz#8618fbedbe2747ff3857cdea88d8892e18c946de"
+  integrity sha512-Xj6Ot275YCJPfH9xWaSFZHrtxPYpv3mZn5oenzTf1JKhnsdFd2yWqm2Il9sObKHeVpR9jKjI75rwY7B5ChkfkQ==
   dependencies:
     body-scroll-lock "^3.0.3"
     lodash "^4.17.20"

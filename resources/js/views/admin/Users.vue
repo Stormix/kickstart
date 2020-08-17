@@ -54,6 +54,15 @@ export default class Home extends Mixins(GlobalHelper, AuthHelper) {
         },
       },
       {
+        title: 'Verfied',
+        checkbox: true,
+        checkboxValue: (item: UserModel): boolean => !!item.verified_at,
+        checkboxText: (item: UserModel): string =>
+          item.verified_at
+            ? moment(item.verified_at).format('MMM Do YY')
+            : 'Not verified',
+      },
+      {
         title: 'Created At',
         field: 'created_at',
         format: (v: string): string => moment(v).format('MMM Do YY'),

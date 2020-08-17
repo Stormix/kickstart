@@ -21,6 +21,7 @@ class User extends JsonResource
             'email' => $this->email,
             '2fa'=> $this->hasTwoFactorEnabled(),
             'roles' => new RoleCollection($this->roles),
+            'verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
