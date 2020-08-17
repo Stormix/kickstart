@@ -99,7 +99,8 @@ ARG PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
 RUN composer dump-autoload --no-interaction --no-dev --optimize
 RUN php artisan storage:link
 RUN php artisan config:cache
-RUN yarn && yarn production
+RUN yarn
+RUN yarn production
 
 # Start app
 EXPOSE 80

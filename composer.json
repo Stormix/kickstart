@@ -38,7 +38,10 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope",
+                "fruitcake/laravel-telescope-toolbar"
+            ]
         }
     },
     "autoload": {
