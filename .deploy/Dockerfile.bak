@@ -4,11 +4,8 @@ FROM php:7.4-fpm
 ENV LARAVEL_PATH=/srv/app
 WORKDIR $LARAVEL_PATH
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y build-essential cron curl locales zip unzip git
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Setup cron job
 RUN (crontab -l ; echo "* * * * * /usr/local/bin/php /srv/app/artisan schedule:run >> /dev/null 2>&1") | crontab
@@ -19,9 +16,9 @@ COPY --from=ochinchina/supervisord:latest /usr/local/bin/supervisord /usr/local/
 # Install caddy
 COPY --from=caddy:2.0.0 /usr/bin/caddy /usr/local/bin/caddy
 
-# Install extensions
+# Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions intl bcmath pdo_mysql opcache uuid exif zip
+RUN install-php-extensions intl bcmath gd pdo_mysql pdo_pgsql opcache redis uuid exif pcntl zip
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install composer & app dependencies
@@ -31,6 +28,24 @@ COPY composer.lock composer.lock
 # TODO remove prestissimo when composer hits v2
 RUN composer global require hirak/prestissimo --no-plugins --no-scripts
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer
+
+# NODEJS NVM --
+ARG NODE_VERSION=12.16.3
+ARG NVM_DIR=/usr/local/nvm
+
+# https://github.com/creationix/nvm#install-script
+RUN mkdir $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+# add node and npm to path so the commands are available
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# Verify installation
+RUN node -v
+RUN npm -v
+
+# YARN
+RUN npm install -g yarn
 
 # Copy app
 COPY --chown=www-data:www-data . $LARAVEL_PATH/
@@ -84,6 +99,8 @@ ARG PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
 RUN composer dump-autoload --no-interaction --no-dev --optimize
 RUN php artisan storage:link
 RUN php artisan config:cache
+RUN yarn
+RUN yarn production
 
 # Start app
 EXPOSE 80
